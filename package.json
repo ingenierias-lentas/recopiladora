@@ -1,0 +1,48 @@
+{
+  "name": "@recopiladora/base",
+  "workspaces": [
+    "./",
+    "plugins/*",
+    "packages/*",
+    "examples/*"
+  ],
+  "version": "0.0.1",
+  "description": "business intelligence data collector",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon --watch src --ext ts --exec ts-node src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://githug.com/ingenierias-lentas/recopiladora"
+  },
+  "keywords": [
+    "typescript",
+    "business-intelligence",
+    "data-collection"
+  ],
+  "author": "Eric Solomon",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/koa": "^2.15.0",
+    "@types/koa__router": "^12.0.4",
+    "@types/koa-logger": "^3.1.5",
+    "@types/koa-mount": "^4.0.5",
+    "@types/node": "^20.14.10",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@koa/router": "^12.0.1",
+    "@recopiladora/types": "^0.0.1",
+    "dotenv": "^16.4.5",
+    "graphql-http": "^1.22.1",
+    "koa": "^2.15.3",
+    "koa-logger": "^3.2.1",
+    "koa-mount": "^4.0.0",
+    "tsconfig-paths": "^4.2.0"
+  }
+}

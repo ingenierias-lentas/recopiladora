@@ -1,0 +1,45 @@
+{
+  "name": "@recopiladora/enchufa-recopiladora-shopify",
+  "version": "0.0.1",
+  "description": "data collector for shopify",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "scripts": {
+    "test": "jest",
+    "shopify": "shopify",
+    "build": "cd plugins/enchufa-recopiladora-shopify && shopify app build",
+    "dev": "cd plugins/enchufa-recopiladora-shopify && shopify app dev",
+    "info": "cd plugins/enchufa-recopiladora-shopify && shopify app info",
+    "generate": "cd plugins/enchufa-recopiladora-shopify && shopify app generate",
+    "deploy": "cd plugins/enchufa-recopiladora-shopify && shopify app deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingenierias-lentas/enchufa-recopiladora-shopify.git"
+  },
+  "keywords": [
+    "typescript",
+    "ecommerce",
+    "business-intelligence",
+    "data-collection"
+  ],
+  "author": "Eric Solomon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ingenierias-lentas/enchufa-recopiladora-shopify/issues"
+  },
+  "homepage": "https://github.com/ingenierias-lentas/enchufa-recopiladora-shopify#readme",
+  "dependencies": {
+    "@recopiladora/types": "^0.0.1",
+    "@shopify/admin-api-client": "^1.0.1",
+    "@shopify/shopify-api": "^11.1.0",
+    "dotenv": "^16.4.5",
+    "qs": "^6.13.0",
+    "tsconfig-paths": "^4.2.0"
+  }
+}

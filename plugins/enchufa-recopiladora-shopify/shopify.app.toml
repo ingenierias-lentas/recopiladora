@@ -1,0 +1,24 @@
+name = "Enchufa Recopiladora"
+client_id = "a61950a2cbd5f32876b0b55587ec7a27"
+application_url = "https://github.com/ingenierias-lentas/recopiladora/"
+embedded = false
+handle = "enchufa-recopiladora"
+
+[access_scopes]
+scopes = "read_products"
+
+[access.admin]
+direct_api_mode = "online"
+
+#[auth]
+#redirect_urls = [
+#  "https://app.example.com/api/auth/callback",
+#  "https://app.example.com/api/auth/oauth/callback",
+#]
+
+#[app_preferences]
+#url = "https://app.example.com/preferences"
+
+#[build]
+#automatically_update_urls_on_dev = false
+#include_config_on_deploy = true

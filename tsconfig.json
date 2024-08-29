@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@recopiladora/base": ["src"],
+      "@recopiladora/enchufas-de-muestra": ["examples/enchufas-de-muestra/src"],
+      "@recopiladora/enchufa-recopiladora-bigquery": ["plugins/enchufa-recopiladora-bigquery/src"],
+      "@recopiladora/enchufa-recopiladora-google-ads": ["plugins/enchufa-recopiladora-google-ads/src"],
+      "@recopiladora/enchufa-recopiladora-meta-business": ["plugins/enchufa-recopiladora-meta-business/src"],
+      "@recopiladora/enchufa-recopiladora-postgresql": ["plugins/enchufa-recopiladora-postgresql/src"],
+      "@recopiladora/enchufa-recopiladora-shopify": ["plugins/enchufa-recopiladora-shopify/src"],
+      "@recopiladora/types": ["packages/types/src"]
+    },
+    "target": "ES6",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist"
+  },
+  "include": [
+    "src/**/*",
+    "packages/**/*",
+    "plugins/**/*",
+    "examples/**/*"
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "name": "@recopiladora/enchufa-recopiladora-postgresql",
+  "version": "0.0.1",
+  "description": "data store for postgresql",
+  "main": "dist/index.js",
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingenierias-lentas/enchufa-recopiladora-postgresql.git"
+  },
+  "keywords": [
+    "typescript",
+    "database",
+    "business-intelligence",
+    "data-collection"
+  ],
+  "author": "Eric Solomon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ingenierias-lentas/enchufa-recopiladora-postgresql/issues"
+  },
+  "homepage": "https://github.com/ingenierias-lentas/enchufa-recopiladora-postgresql#readme",
+  "dependencies": {
+    "@recopiladora/types": "^0.0.1",
+    "dotenv": "^16.4.5",
+    "pg": "^8.12.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.37.3",
+    "tsconfig-paths": "^4.2.0"
+  }
+}

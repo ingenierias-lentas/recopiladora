@@ -1,0 +1,28 @@
+{
+  "name": "@recopiladora/enchufas-de-muestra",
+  "version": "0.0.1",
+  "description": "example of recopiladora with default plugins",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "start": "ts-node src/index.ts",
+    "dev": "nodemon --watch src --ext ts --exec ts-node -r tsconfig-paths/register src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://githug.com/ingenierias-lentas/recopiladora"
+  },
+  "keywords": [
+    "example",
+    "typescript",
+    "plugins"
+  ],
+  "author": "Eric Solomon",
+  "license": "MIT",
+  "dependencies": {
+    "@recopiladora/base": "^0.0.1",
+    "@recopiladora/types": "^0.0.1",
+    "tsconfig-paths": "^4.2.0"
+  }
+}
