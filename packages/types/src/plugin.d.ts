@@ -1,9 +1,6 @@
-import Router from '@koa/router';
+/// <reference path="./pluginType.ts" />
 
-export enum PluginType {
-  Collect = 'collect',
-  Store = 'store',
-}
+import Router from '@koa/router';
 
 export interface Plugin {
   name: string;
