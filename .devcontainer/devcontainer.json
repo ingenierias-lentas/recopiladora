@@ -2,9 +2,6 @@
     "name": "Node.js & TypeScript",
     "image": "mcr.microsoft.com/devcontainers/typescript-node:22-bookworm",
     "features": {
-        "ghcr.io/devcontainers/features/node:1": {
-            "version": "lts"
-        },
         "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
     "customizations": {
@@ -12,7 +9,8 @@
             "extensions": [
                 "dbaeumer.vscode-eslint",
                 "esbenp.prettier-vscode",
-                "ms-vscode.vscode-typescript-next"
+                "ms-vscode.vscode-typescript-next",
+                "ms-azuretools.vscode-docker"
             ]
         }
     },
