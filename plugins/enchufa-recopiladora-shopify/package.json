@@ -13,10 +13,10 @@
     "test": "jest",
     "shopify": "shopify",
     "build": "shopify app build --path=./",
-    "dev": "cd plugins/enchufa-recopiladora-shopify && shopify app dev",
-    "info": "cd plugins/enchufa-recopiladora-shopify && shopify app info",
-    "generate": "cd plugins/enchufa-recopiladora-shopify && shopify app generate",
-    "deploy": "cd plugins/enchufa-recopiladora-shopify && shopify app deploy"
+    "dev": "shopify app dev --path=./",
+    "info": "shopify app info --path=./",
+    "generate": "shopify app generate --path=./",
+    "deploy": "shopify app deploy --path=./"
   },
   "repository": {
     "type": "git",
