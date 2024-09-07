@@ -1,6 +1,9 @@
 {
     "name": "Node.js & TypeScript",
-    "image": "mcr.microsoft.com/devcontainers/typescript-node:22-bookworm",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".." // path to the current context in Dockerfile
+    },
     "features": {
         "ghcr.io/devcontainers/features/docker-in-docker:2": {}
     },
@@ -16,7 +19,7 @@
             ]
         }
     },
-    "postCreateCommand": "npm install",
+    "postCreateCommand": "ls -a",
     "remoteUser": "node",
     "portsAttributes": {
         "3000": {
@@ -24,10 +27,16 @@
             "onAutoForward": "openPreview"
         }
     },
-    "forwardPorts": [3000],
+    "forwardPorts": [
+        3000,
+        22
+    ],
     "mounts": [
         "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
     ],
+    // "workspaceMount": "source=${localWorkspaceFolder},target=/,type=bind,consistency=cached",
+    // "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+    // "workspaceFolder": "/",
     "containerEnv": {
         "NODE_ENV": "development"
     }

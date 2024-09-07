@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/devcontainers/typescript-node:22-bookworm@sha256:bac061bcdaed47c16949eaf1b1315cc69ba5e372911e77d6cdfdc5843c1c012c
+
+EXPOSE 3000
+WORKDIR /app
+
+COPY package.json \
+  package-lock.json \
+  tsconfig.json \
+  ./
+
+# copied before install to be linked as npm workspaces
+COPY ./examples/ ./examples/
+COPY ./packages/ ./packages/
+COPY ./plugins/ ./plugins/
+COPY ./src/ ./src/
+
+# COPY . .
+
+RUN npm install
+
