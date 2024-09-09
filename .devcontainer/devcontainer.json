@@ -1,7 +1,7 @@
 {
     "name": "Node.js & TypeScript",
     "build": {
-        "dockerfile": "Dockerfile",
+        "dockerfile": "Dockerfile.development",
         "context": ".." // path to the current context in Dockerfile
     },
     "features": {

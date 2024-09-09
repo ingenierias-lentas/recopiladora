@@ -14,7 +14,5 @@ COPY ./packages/ ./packages/
 COPY ./plugins/ ./plugins/
 COPY ./src/ ./src/
 
-# COPY . .
-
 RUN npm install
 
