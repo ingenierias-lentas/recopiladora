@@ -1,5 +1,5 @@
 {
-  "name": "@recopiladora/enchufa-recopiladora-shopify",
+  "name": "@ingenierias-lentas/enchufa-recopiladora-shopify",
   "version": "0.0.1",
   "description": "data collector for shopify",
   "main": "dist/index.js",
@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/ingenierias-lentas/enchufa-recopiladora-shopify#readme",
   "dependencies": {
-    "@recopiladora/types": "^0.0.1",
+    "@ingenierias-lentas/types": "^0.0.1",
     "@shopify/admin-api-client": "^1.0.1",
     "@shopify/shopify-api": "^11.1.0",
     "dotenv": "^16.4.5",

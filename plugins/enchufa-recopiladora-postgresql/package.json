@@ -1,5 +1,5 @@
 {
-  "name": "@recopiladora/enchufa-recopiladora-postgresql",
+  "name": "@ingenierias-lentas/enchufa-recopiladora-postgresql",
   "version": "0.0.1",
   "description": "data store for postgresql",
   "main": "dist/index.js",
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/ingenierias-lentas/enchufa-recopiladora-postgresql#readme",
   "dependencies": {
-    "@recopiladora/types": "^0.0.1",
+    "@ingenierias-lentas/types": "^0.0.1",
     "dotenv": "^16.4.5",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",

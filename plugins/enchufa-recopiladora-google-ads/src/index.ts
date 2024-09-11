@@ -1,4 +1,4 @@
-import { Plugin, PluginType } from '@recopiladora/types';
+import { Plugin, PluginType } from '@ingenierias-lentas/types';
 
 export const PluginGoogleAds: Plugin = {
   name: 'PluginGoogleAds',

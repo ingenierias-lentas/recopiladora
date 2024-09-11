@@ -1,10 +1,10 @@
 // src/index.ts
-import { Manager } from '@recopiladora/base';
-import { PluginShopify } from '@recopiladora/enchufa-recopiladora-shopify';
-// import { PluginBigquery } from '@recopiladora/enchufa-recopiladora-bigquery';
-// import { PluginGoogleAds } from '@recopiladora/enchufa-recopiladora-google-ads';
-// import { PluginMetaBusiness } from '@recopiladora/enchufa-recopiladora-meta-business';
-// import { PluginPostgresql } from '@recopiladora/enchufa-recopiladora-postgresql';
+import { Manager } from '@ingenierias-lentas/base';
+import { PluginShopify } from '@ingenierias-lentas/enchufa-recopiladora-shopify';
+// import { PluginBigquery } from '@ingenierias-lentas/enchufa-recopiladora-bigquery';
+// import { PluginGoogleAds } from '@ingenierias-lentas/enchufa-recopiladora-google-ads';
+// import { PluginMetaBusiness } from '@ingenierias-lentas/enchufa-recopiladora-meta-business';
+// import { PluginPostgresql } from '@ingenierias-lentas/enchufa-recopiladora-postgresql';
 
 const pluginManager = new Manager();
 pluginManager.loadPlugin(PluginShopify);

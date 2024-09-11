@@ -1,5 +1,5 @@
 {
-  "name": "@recopiladora/enchufas-de-muestra",
+  "name": "@ingenierias-lentas/enchufas-de-muestra",
   "version": "0.0.1",
   "description": "example of recopiladora with default plugins",
   "main": "dist/index.js",
@@ -21,8 +21,8 @@
   "author": "Eric Solomon",
   "license": "MIT",
   "dependencies": {
-    "@recopiladora/base": "^0.0.1",
-    "@recopiladora/types": "^0.0.1",
+    "@ingenierias-lentas/base": "^0.0.1",
+    "@ingenierias-lentas/types": "^0.0.1",
     "tsconfig-paths": "^4.2.0"
   }
 }
