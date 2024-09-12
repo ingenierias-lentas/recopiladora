@@ -1,23 +1,7 @@
-import Router from '@koa/router';
+export { pluginType } from './pluginType';
+export { Plugin, CollectorPlugin, StorePlugin } from './types';
 
-export declare type PluginType = 'collect' | 'store';
-
-export interface Plugin {
-  name: string;
-  type: PluginType;
-  router: Router;
-  execute(): void;
-  getSchema(): void; // Get the schema for the collected data
-  marshall(): void; // Marshall data into an intermediary format
-  unmarshall(): void; // Unmarshall data from an intermediary format
-}
-
-export interface CollectorPlugin extends Plugin {
-  collect(): void; // Collect data from external source
-}
-
-export interface StorePlugin extends Plugin {
-  store(): void; // Store data in a datastore
-  generateMigration(): void; // Generate a migration to update the datastore schema
-  migrate(): void; // Perform datastore migration
-}
+// export declare enum pluginType {
+//   Collect = "collect",
+//   Store = "store"
+// }

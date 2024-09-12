@@ -22,7 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "@ingenierias-lentas/base": "^0.0.1",
-    "@ingenierias-lentas/recopiladora-types": "^0.0.1",
+    "@ingenierias-lentas/recopiladora-types": "^0.0.3",
     "tsconfig-paths": "^4.2.0"
   }
 }

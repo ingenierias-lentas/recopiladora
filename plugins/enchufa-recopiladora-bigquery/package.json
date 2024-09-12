@@ -31,7 +31,7 @@
   "homepage": "https://github.com/ingenierias-lentas/enchufa-recopiladora-bigquery#readme",
   "dependencies": {
     "@google-cloud/bigquery": "^7.8.0",
-    "@ingenierias-lentas/recopiladora-types": "^0.0.1",
+    "@ingenierias-lentas/recopiladora-types": "^0.0.3",
     "dotenv": "^16.4.5",
     "tsconfig-paths": "^4.2.0"
   }
