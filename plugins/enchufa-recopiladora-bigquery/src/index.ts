@@ -2,7 +2,7 @@ import { Plugin, PluginType } from '@ingenierias-lentas/recopiladora-types';
 
 export const PluginBigquery: Plugin = {
   name: 'PluginBigquery',
-  type: PluginType.Collect,
+  type: 'collect',
   execute: () => {
     console.log('Executing Plugin Bigquery');
   }

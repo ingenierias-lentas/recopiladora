@@ -1,4 +1,5 @@
-import { PluginType, Plugin } from '@ingenierias-lentas/recopiladora-types';
+import type { Plugin } from '@ingenierias-lentas/recopiladora-types';
+import { PluginType } from '@ingenierias-lentas/recopiladora-types/dist/index.js';
 import Router from '@koa/router';
 import { collectData } from './lib/collector';
 import { authRouter } from './routes/auth';
@@ -17,7 +18,7 @@ router.use(webhooksRouter.routes());
 
 export const PluginShopify: Plugin = {
   name: 'PluginShopify',
-  type: PluginType.Collect,
+  type: 'collect',
   router: router,
   execute: () => {
     console.log('Executing Plugin Shopify');
