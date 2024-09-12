@@ -23,9 +23,9 @@
       "@ingenierias-lentas/enchufa-recopiladora-shopify": [
         "plugins/enchufa-recopiladora-shopify/src"
       ],
-      "@ingenierias-lentas/types": [
-        "packages/types/src"
-      ]
+      // "@ingenierias-lentas/recopiladora-types": [
+      //   "packages/types/src"
+      // ]
     },
     "target": "ES6",
     "module": "commonjs",

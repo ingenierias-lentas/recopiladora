@@ -1,4 +1,4 @@
-import { Plugin } from '@ingenierias-lentas/types';
+import { Plugin } from '@ingenierias-lentas/recopiladora-types';
 import Server from './server';
 
 export class Manager {

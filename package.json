@@ -37,8 +37,8 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
+    "@ingenierias-lentas/recopiladora-types": "^0.0.1",
     "@koa/router": "^12.0.1",
-    "@ingenierias-lentas/types": "^0.0.1",
     "dotenv": "^16.4.5",
     "graphql-http": "^1.22.1",
     "koa": "^2.15.3",

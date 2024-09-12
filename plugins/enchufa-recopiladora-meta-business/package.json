@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/ingenierias-lentas/enchufa-recopiladora-meta-business#readme",
   "dependencies": {
-    "@ingenierias-lentas/types": "^0.0.1",
+    "@ingenierias-lentas/recopiladora-types": "^0.0.1",
     "dotenv": "^16.4.5",
     "tsconfig-paths": "^4.2.0"
   }

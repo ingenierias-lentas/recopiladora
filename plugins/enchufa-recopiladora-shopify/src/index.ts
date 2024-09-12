@@ -1,4 +1,4 @@
-import { Plugin, PluginType } from '@ingenierias-lentas/types';
+import { PluginType, Plugin } from '@ingenierias-lentas/recopiladora-types';
 import Router from '@koa/router';
 import { collectData } from './lib/collector';
 import { authRouter } from './routes/auth';

@@ -1,6 +1,5 @@
-/// <reference path="./pluginType.ts" />
-
 import Router from '@koa/router';
+import { PluginType } from './pluginType';
 
 export interface Plugin {
   name: string;

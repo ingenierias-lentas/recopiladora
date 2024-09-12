@@ -1,4 +1,4 @@
-import { Plugin, PluginType } from '@ingenierias-lentas/types';
+import { Plugin, PluginType } from '@ingenierias-lentas/recopiladora-types';
 
 export const PluginBigquery: Plugin = {
   name: 'PluginBigquery',
