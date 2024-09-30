@@ -1,0 +1,131 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Categories
+  fields:
+    - name: id
+      type: Uuid!
+    - name: name
+      type: Text!
+  graphql:
+    typeName: Categories
+    inputTypeName: CategoriesInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_connector
+      dataConnectorObjectType: categories
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Categories
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - name
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: CategoriesBoolExp
+  operand:
+    object:
+      type: Categories
+      comparableFields:
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+      comparableRelationships:
+        - relationshipName: products
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: CategoriesBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: CategoriesAggExp
+  operand:
+    object:
+      aggregatedType: Categories
+      aggregatableFields:
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: CategoriesAggExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Categories
+  objectType: Categories
+  source:
+    dataConnectorName: my_connector
+    collection: categories
+  filterExpressionType: CategoriesBoolExp
+  aggregateExpression: CategoriesAggExp
+  orderableFields:
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: categories
+    selectUniques:
+      - queryRootField: categoriesById
+        uniqueIdentifier:
+          - id
+    orderByExpressionType: CategoriesOrderBy
+    filterInputTypeName: CategoriesFilterInput
+    aggregate:
+      queryRootField: categoriesAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Categories
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: products
+  sourceType: Categories
+  target:
+    model:
+      name: Products
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: ProductsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: categoryId
+  graphql:
+    aggregateFieldName: productsAggregate
+

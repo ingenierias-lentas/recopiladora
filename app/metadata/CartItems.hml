@@ -1,0 +1,205 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: CartItems
+  fields:
+    - name: cartId
+      type: Uuid!
+    - name: createdAt
+      type: Timestamptz
+    - name: id
+      type: Uuid!
+    - name: productId
+      type: Uuid!
+    - name: quantity
+      type: Int4!
+    - name: updatedAt
+      type: Timestamptz
+  graphql:
+    typeName: CartItems
+    inputTypeName: CartItemsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_connector
+      dataConnectorObjectType: cart_items
+      fieldMapping:
+        cartId:
+          column:
+            name: cart_id
+        createdAt:
+          column:
+            name: created_at
+        id:
+          column:
+            name: id
+        productId:
+          column:
+            name: product_id
+        quantity:
+          column:
+            name: quantity
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: CartItems
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - cartId
+          - createdAt
+          - id
+          - productId
+          - quantity
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: CartItemsBoolExp
+  operand:
+    object:
+      type: CartItems
+      comparableFields:
+        - fieldName: cartId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: productId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: quantity
+          booleanExpressionType: Int4BoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: cart
+        - relationshipName: product
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: CartItemsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: CartItemsAggExp
+  operand:
+    object:
+      aggregatedType: CartItems
+      aggregatableFields:
+        - fieldName: cartId
+          aggregateExpression: UuidAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: productId
+          aggregateExpression: UuidAggExp
+        - fieldName: quantity
+          aggregateExpression: Int4AggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: CartItemsAggExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: CartItems
+  objectType: CartItems
+  source:
+    dataConnectorName: my_connector
+    collection: cart_items
+  filterExpressionType: CartItemsBoolExp
+  aggregateExpression: CartItemsAggExp
+  orderableFields:
+    - fieldName: cartId
+      orderByDirections:
+        enableAll: true
+    - fieldName: createdAt
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: productId
+      orderByDirections:
+        enableAll: true
+    - fieldName: quantity
+      orderByDirections:
+        enableAll: true
+    - fieldName: updatedAt
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: cartItems
+    selectUniques:
+      - queryRootField: cartItemsById
+        uniqueIdentifier:
+          - id
+    orderByExpressionType: CartItemsOrderBy
+    filterInputTypeName: CartItemsFilterInput
+    aggregate:
+      queryRootField: cartItemsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: CartItems
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: cart
+  sourceType: CartItems
+  target:
+    model:
+      name: Carts
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: cartId
+      target:
+        modelField:
+          - fieldName: id
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: product
+  sourceType: CartItems
+  target:
+    model:
+      name: Products
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: productId
+      target:
+        modelField:
+          - fieldName: id
+

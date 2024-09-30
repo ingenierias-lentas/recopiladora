@@ -1,0 +1,321 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Users
+  fields:
+    - name: createdAt
+      type: Timestamptz!
+    - name: email
+      type: Text!
+    - name: favoriteArtist
+      type: Int4
+    - name: id
+      type: Uuid!
+    - name: isEmailVerified
+      type: Bool
+    - name: lastSeen
+      type: Timestamptz
+    - name: name
+      type: Text!
+    - name: password
+      type: Text
+    - name: updatedAt
+      type: Timestamptz!
+  graphql:
+    typeName: Users
+    inputTypeName: UsersInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_connector
+      dataConnectorObjectType: users
+      fieldMapping:
+        createdAt:
+          column:
+            name: created_at
+        email:
+          column:
+            name: email
+        favoriteArtist:
+          column:
+            name: favorite_artist
+        id:
+          column:
+            name: id
+        isEmailVerified:
+          column:
+            name: is_email_verified
+        lastSeen:
+          column:
+            name: last_seen
+        name:
+          column:
+            name: name
+        password:
+          column:
+            name: password
+        updatedAt:
+          column:
+            name: updated_at
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Users
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - createdAt
+          - email
+          - favoriteArtist
+          - id
+          - isEmailVerified
+          - lastSeen
+          - name
+          - password
+          - updatedAt
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: UsersBoolExp
+  operand:
+    object:
+      type: Users
+      comparableFields:
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: email
+          booleanExpressionType: TextBoolExp
+        - fieldName: favoriteArtist
+          booleanExpressionType: Int4BoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: isEmailVerified
+          booleanExpressionType: BoolBoolExp
+        - fieldName: lastSeen
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: password
+          booleanExpressionType: TextBoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+      comparableRelationships:
+        - relationshipName: carts
+        - relationshipName: coupons
+        - relationshipName: notifications
+        - relationshipName: orders
+        - relationshipName: reviews
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: UsersBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: UsersAggExp
+  operand:
+    object:
+      aggregatedType: Users
+      aggregatableFields:
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: email
+          aggregateExpression: TextAggExp
+        - fieldName: favoriteArtist
+          aggregateExpression: Int4AggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: isEmailVerified
+          aggregateExpression: BoolAggExp
+        - fieldName: lastSeen
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: password
+          aggregateExpression: TextAggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: UsersAggExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Users
+  objectType: Users
+  source:
+    dataConnectorName: my_connector
+    collection: users
+  filterExpressionType: UsersBoolExp
+  aggregateExpression: UsersAggExp
+  orderableFields:
+    - fieldName: createdAt
+      orderByDirections:
+        enableAll: true
+    - fieldName: email
+      orderByDirections:
+        enableAll: true
+    - fieldName: favoriteArtist
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: isEmailVerified
+      orderByDirections:
+        enableAll: true
+    - fieldName: lastSeen
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: password
+      orderByDirections:
+        enableAll: true
+    - fieldName: updatedAt
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: users
+    selectUniques:
+      - queryRootField: usersById
+        uniqueIdentifier:
+          - id
+    orderByExpressionType: UsersOrderBy
+    filterInputTypeName: UsersFilterInput
+    aggregate:
+      queryRootField: usersAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Users
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: carts
+  sourceType: Users
+  target:
+    model:
+      name: Carts
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: CartsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: cartsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: coupons
+  sourceType: Users
+  target:
+    model:
+      name: Coupons
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: CouponsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: couponsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: notifications
+  sourceType: Users
+  target:
+    model:
+      name: Notifications
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: NotificationsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: notificationsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: orders
+  sourceType: Users
+  target:
+    model:
+      name: Orders
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: OrdersAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: ordersAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: reviews
+  sourceType: Users
+  target:
+    model:
+      name: Reviews
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: ReviewsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: userId
+  graphql:
+    aggregateFieldName: reviewsAggregate
+

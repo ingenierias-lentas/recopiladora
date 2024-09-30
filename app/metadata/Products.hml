@@ -1,0 +1,339 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Products
+  fields:
+    - name: categoryId
+      type: Uuid!
+    - name: countryOfOrigin
+      type: Text!
+    - name: createdAt
+      type: Timestamptz!
+    - name: description
+      type: Text!
+    - name: id
+      type: Uuid!
+    - name: image
+      type: Text!
+    - name: manufacturerId
+      type: Uuid!
+    - name: name
+      type: Text!
+    - name: price
+      type: Int4!
+    - name: updatedAt
+      type: Timestamptz!
+    - name: vector
+      type: Vector
+  graphql:
+    typeName: Products
+    inputTypeName: ProductsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_connector
+      dataConnectorObjectType: products
+      fieldMapping:
+        categoryId:
+          column:
+            name: category_id
+        countryOfOrigin:
+          column:
+            name: country_of_origin
+        createdAt:
+          column:
+            name: created_at
+        description:
+          column:
+            name: description
+        id:
+          column:
+            name: id
+        image:
+          column:
+            name: image
+        manufacturerId:
+          column:
+            name: manufacturer_id
+        name:
+          column:
+            name: name
+        price:
+          column:
+            name: price
+        updatedAt:
+          column:
+            name: updated_at
+        vector:
+          column:
+            name: vector
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Products
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - categoryId
+          - countryOfOrigin
+          - createdAt
+          - description
+          - id
+          - image
+          - manufacturerId
+          - name
+          - price
+          - updatedAt
+          - vector
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: ProductsBoolExp
+  operand:
+    object:
+      type: Products
+      comparableFields:
+        - fieldName: categoryId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: countryOfOrigin
+          booleanExpressionType: TextBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: description
+          booleanExpressionType: TextBoolExp
+        - fieldName: id
+          booleanExpressionType: UuidBoolExp
+        - fieldName: image
+          booleanExpressionType: TextBoolExp
+        - fieldName: manufacturerId
+          booleanExpressionType: UuidBoolExp
+        - fieldName: name
+          booleanExpressionType: TextBoolExp
+        - fieldName: price
+          booleanExpressionType: Int4BoolExp
+        - fieldName: updatedAt
+          booleanExpressionType: TimestamptzBoolExp
+        - fieldName: vector
+          booleanExpressionType: VectorBoolExp
+      comparableRelationships:
+        - relationshipName: cartItems
+        - relationshipName: orders
+        - relationshipName: category
+        - relationshipName: manufacturer
+        - relationshipName: reviews
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: ProductsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: ProductsAggExp
+  operand:
+    object:
+      aggregatedType: Products
+      aggregatableFields:
+        - fieldName: categoryId
+          aggregateExpression: UuidAggExp
+        - fieldName: countryOfOrigin
+          aggregateExpression: TextAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: description
+          aggregateExpression: TextAggExp
+        - fieldName: id
+          aggregateExpression: UuidAggExp
+        - fieldName: image
+          aggregateExpression: TextAggExp
+        - fieldName: manufacturerId
+          aggregateExpression: UuidAggExp
+        - fieldName: name
+          aggregateExpression: TextAggExp
+        - fieldName: price
+          aggregateExpression: Int4AggExp
+        - fieldName: updatedAt
+          aggregateExpression: TimestamptzAggExp
+        - fieldName: vector
+          aggregateExpression: VectorAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: ProductsAggExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Products
+  objectType: Products
+  source:
+    dataConnectorName: my_connector
+    collection: products
+  filterExpressionType: ProductsBoolExp
+  aggregateExpression: ProductsAggExp
+  orderableFields:
+    - fieldName: categoryId
+      orderByDirections:
+        enableAll: true
+    - fieldName: countryOfOrigin
+      orderByDirections:
+        enableAll: true
+    - fieldName: createdAt
+      orderByDirections:
+        enableAll: true
+    - fieldName: description
+      orderByDirections:
+        enableAll: true
+    - fieldName: id
+      orderByDirections:
+        enableAll: true
+    - fieldName: image
+      orderByDirections:
+        enableAll: true
+    - fieldName: manufacturerId
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+    - fieldName: price
+      orderByDirections:
+        enableAll: true
+    - fieldName: updatedAt
+      orderByDirections:
+        enableAll: true
+    - fieldName: vector
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: products
+    selectUniques:
+      - queryRootField: productsById
+        uniqueIdentifier:
+          - id
+    orderByExpressionType: ProductsOrderBy
+    filterInputTypeName: ProductsFilterInput
+    aggregate:
+      queryRootField: productsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Products
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: cartItems
+  sourceType: Products
+  target:
+    model:
+      name: CartItems
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: CartItemsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: productId
+  graphql:
+    aggregateFieldName: cartItemsAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: orders
+  sourceType: Products
+  target:
+    model:
+      name: Orders
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: OrdersAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: productId
+  graphql:
+    aggregateFieldName: ordersAggregate
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: category
+  sourceType: Products
+  target:
+    model:
+      name: Categories
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: categoryId
+      target:
+        modelField:
+          - fieldName: id
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: manufacturer
+  sourceType: Products
+  target:
+    model:
+      name: Manufacturers
+      relationshipType: Object
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: manufacturerId
+      target:
+        modelField:
+          - fieldName: id
+
+---
+kind: Relationship
+version: v1
+definition:
+  name: reviews
+  sourceType: Products
+  target:
+    model:
+      name: Reviews
+      relationshipType: Array
+      aggregate:
+        aggregateExpression: ReviewsAggExp
+  mapping:
+    - source:
+        fieldPath:
+          - fieldName: id
+      target:
+        modelField:
+          - fieldName: productId
+  graphql:
+    aggregateFieldName: reviewsAggregate
+
