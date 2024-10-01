@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: PostUserCreateUsersWithListInput
+  outputType: User!
+  arguments:
+    - name: data
+      type: "[User!]!"
+      description: Request body
+    - name: headers
+      type: Json
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: postUserCreateUsersWithListInput
+  graphql:
+    rootFieldName: postUserCreateUsersWithListInput
+    rootFieldKind: Mutation
+  description: Creates list of users with given input array
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: PostUserCreateUsersWithListInput
+  permissions:
+    - role: admin
+      allowExecution: true
+

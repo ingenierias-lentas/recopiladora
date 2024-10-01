@@ -1,0 +1,156 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: GetPetFindPetsByStatusQuery
+  fields:
+    - name: status
+      type: AvailablePendingSold
+      description: Status values that need to be considered for filter
+  graphql:
+    typeName: GetPetFindPetsByStatusQuery
+    inputTypeName: GetPetFindPetsByStatusQueryInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_openapi
+      dataConnectorObjectType: getPetFindPetsByStatus_query
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: GetPetFindPetsByStatusQuery
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - status
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Category
+  fields:
+    - name: id
+      type: Float
+    - name: name
+      type: String
+  graphql:
+    typeName: Category
+    inputTypeName: CategoryInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_openapi
+      dataConnectorObjectType: Category
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Category
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Tag
+  fields:
+    - name: id
+      type: Float
+    - name: name
+      type: String
+  graphql:
+    typeName: Tag
+    inputTypeName: TagInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_openapi
+      dataConnectorObjectType: Tag
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Tag
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Pet
+  fields:
+    - name: category
+      type: Category
+    - name: id
+      type: Float
+    - name: name
+      type: String!
+    - name: photoUrls
+      type: "[String!]!"
+    - name: status
+      type: AvailablePendingSold
+      description: pet status in the store
+    - name: tags
+      type: "[Tag!]"
+  graphql:
+    typeName: Pet
+    inputTypeName: PetInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_openapi
+      dataConnectorObjectType: Pet
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Pet
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - category
+          - id
+          - name
+          - photoUrls
+          - status
+          - tags
+
+---
+kind: Command
+version: v1
+definition:
+  name: GetPetFindPetsByStatus
+  outputType: "[Pet!]!"
+  arguments:
+    - name: headers
+      type: Json
+    - name: query
+      type: GetPetFindPetsByStatusQuery!
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      function: getPetFindPetsByStatus
+  graphql:
+    rootFieldName: getPetFindPetsByStatus
+    rootFieldKind: Query
+  description: Finds Pets by status
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: GetPetFindPetsByStatus
+  permissions:
+    - role: admin
+      allowExecution: true
+

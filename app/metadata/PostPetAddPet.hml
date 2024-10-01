@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: PostPetAddPet
+  outputType: Pet!
+  arguments:
+    - name: data
+      type: Pet!
+      description: Request body
+    - name: headers
+      type: Json
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: postPetAddPet
+  graphql:
+    rootFieldName: postPetAddPet
+    rootFieldKind: Mutation
+  description: Add a new pet to the store
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: PostPetAddPet
+  permissions:
+    - role: admin
+      allowExecution: true
+

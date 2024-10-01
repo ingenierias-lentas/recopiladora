@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: GetUserLogoutUser
+  outputType: Json!
+  arguments:
+    - name: headers
+      type: Json
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      function: getUserLogoutUser
+  graphql:
+    rootFieldName: getUserLogoutUser
+    rootFieldKind: Query
+  description: Logs out current logged in user session
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: GetUserLogoutUser
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: PutPetUpdatePet
+  outputType: Pet!
+  arguments:
+    - name: data
+      type: Pet!
+      description: Request body
+    - name: headers
+      type: Json
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: putPetUpdatePet
+  graphql:
+    rootFieldName: putPetUpdatePet
+    rootFieldKind: Mutation
+  description: Update an existing pet
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: PutPetUpdatePet
+  permissions:
+    - role: admin
+      allowExecution: true
+

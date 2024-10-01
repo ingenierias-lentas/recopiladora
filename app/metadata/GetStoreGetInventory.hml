@@ -1,0 +1,27 @@
+---
+kind: Command
+version: v1
+definition:
+  name: GetStoreGetInventory
+  outputType: Json!
+  arguments:
+    - name: headers
+      type: Json
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      function: getStoreGetInventory
+  graphql:
+    rootFieldName: getStoreGetInventory
+    rootFieldKind: Query
+  description: Returns pet inventories by status
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: GetStoreGetInventory
+  permissions:
+    - role: admin
+      allowExecution: true
+

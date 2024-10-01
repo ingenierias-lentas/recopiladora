@@ -1,0 +1,33 @@
+---
+kind: Command
+version: v1
+definition:
+  name: PutUserUpdateUser
+  outputType: Json!
+  arguments:
+    - name: data
+      type: User!
+      description: Request body
+    - name: headers
+      type: Json
+    - name: username
+      type: String!
+      description: name that needs to be updated
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: putUserUpdateUser
+  graphql:
+    rootFieldName: putUserUpdateUser
+    rootFieldKind: Mutation
+  description: Update user
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: PutUserUpdateUser
+  permissions:
+    - role: admin
+      allowExecution: true
+

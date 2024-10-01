@@ -1,0 +1,34 @@
+packagingDefinition:
+  type: ManagedDockerBuild
+supportedEnvironmentVariables:
+  - name: NDC_OAS_DOCUMENT_URI
+    description: "The URI of OAS Document. If not provided, the connector will look for `/etc/connector/swagger.json` by default"
+  - name: NDC_OAS_BASE_URL
+    description: "Base url of the API"
+  - name: NDC_OAS_LAMBDA_PRETTY_LOGS
+    description: "Print logs in a human readable format instead of JSON"
+    defaultValue: "true"
+  - name: NDC_OAS_FILE_OVERWRITE
+    description: "Overwrite previously generated functions.ts file and api.ts file"
+    defaultValue: "false"
+commands:
+  update:
+    type: Dockerized
+    dockerImage: ghcr.io/hasura/ndc-open-api-lambda:v0.2.0
+    commandArgs: [ "update" ]
+cliPlugin:
+  type: Docker
+  dockerImage: ghcr.io/hasura/ndc-open-api-lambda:v0.2.0
+dockerComposeWatch:
+  # Rebuild the container if a new package restore is required because package[-lock].json changed
+  - path: package.json
+    target: /functions/package.json
+    action: rebuild
+  - path: package-lock.json
+    target: /functions/package-lock.json
+    action: rebuild
+  # For any other file change, simply copy it into the existing container and restart it
+  - path: ./
+    target: /functions
+    action: sync+restart
+    exclude: swagger.json

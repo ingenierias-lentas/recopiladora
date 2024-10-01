@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Order
+  fields:
+    - name: complete
+      type: Boolean
+    - name: id
+      type: Float
+    - name: petId
+      type: Float
+    - name: quantity
+      type: Float
+    - name: shipDate
+      type: String
+    - name: status
+      type: PlacedApprovedDelivered
+      description: Order Status
+  graphql:
+    typeName: Order
+    inputTypeName: OrderInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_openapi
+      dataConnectorObjectType: Order
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Order
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - complete
+          - id
+          - petId
+          - quantity
+          - shipDate
+          - status
+
+---
+kind: Command
+version: v1
+definition:
+  name: PostStorePlaceOrder
+  outputType: Order!
+  arguments:
+    - name: data
+      type: Order!
+      description: Request body
+    - name: headers
+      type: Json
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: postStorePlaceOrder
+  graphql:
+    rootFieldName: postStorePlaceOrder
+    rootFieldKind: Mutation
+  description: Place an order for a pet
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: PostStorePlaceOrder
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteStoreDeleteOrder
+  outputType: Json!
+  arguments:
+    - name: headers
+      type: Json
+    - name: orderId
+      type: Float!
+      description: ID of the order that needs to be deleted
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: deleteStoreDeleteOrder
+  graphql:
+    rootFieldName: deleteStoreDeleteOrder
+    rootFieldKind: Mutation
+  description: Delete purchase order by ID
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteStoreDeleteOrder
+  permissions:
+    - role: admin
+      allowExecution: true
+

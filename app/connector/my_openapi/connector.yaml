@@ -1,0 +1,22 @@
+kind: Connector
+version: v2
+definition:
+  name: my_openapi
+  subgraph: app
+  source: hasura/openapi:v0.2.0
+  context: .
+  envMapping:
+    HASURA_SERVICE_TOKEN_SECRET:
+      fromEnv: APP_MY_OPENAPI_HASURA_SERVICE_TOKEN_SECRET
+    NDC_OAS_BASE_URL:
+      fromEnv: APP_MY_OPENAPI_NDC_OAS_BASE_URL
+    NDC_OAS_DOCUMENT_URI:
+      fromEnv: APP_MY_OPENAPI_NDC_OAS_DOCUMENT_URI
+    NDC_OAS_FILE_OVERWRITE:
+      fromEnv: APP_MY_OPENAPI_NDC_OAS_FILE_OVERWRITE
+    NDC_OAS_LAMBDA_PRETTY_LOGS:
+      fromEnv: APP_MY_OPENAPI_NDC_OAS_LAMBDA_PRETTY_LOGS
+    OTEL_EXPORTER_OTLP_ENDPOINT:
+      fromEnv: APP_MY_OPENAPI_OTEL_EXPORTER_OTLP_ENDPOINT
+    OTEL_SERVICE_NAME:
+      fromEnv: APP_MY_OPENAPI_OTEL_SERVICE_NAME

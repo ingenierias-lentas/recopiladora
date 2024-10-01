@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: PostUserCreateUser
+  outputType: Json!
+  arguments:
+    - name: data
+      type: User!
+      description: Request body
+    - name: headers
+      type: Json
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: postUserCreateUser
+  graphql:
+    rootFieldName: postUserCreateUser
+    rootFieldKind: Mutation
+  description: Create user
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: PostUserCreateUser
+  permissions:
+    - role: admin
+      allowExecution: true
+

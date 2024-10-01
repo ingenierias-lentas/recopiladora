@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "@hasura/ndc-lambda-sdk": "1.8.0"
+  },
+  "scripts": {
+    "start": "ndc-lambda-sdk host -f functions.ts serve --configuration ./ --port 8080",
+    "watch": "ndc-lambda-sdk host -f functions.ts --watch serve --configuration ./ --pretty-print-logs --port 8080"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  }
+}

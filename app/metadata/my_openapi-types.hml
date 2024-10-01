@@ -1,0 +1,84 @@
+---
+kind: ScalarType
+version: v1
+definition:
+  name: Json
+  graphql:
+    typeName: Json
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: JsonBoolExp
+  operand:
+    scalar:
+      type: Json
+      comparisonOperators: []
+      dataConnectorOperatorMapping:
+        - dataConnectorName: my_openapi
+          dataConnectorScalarType: JSON
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: JsonBoolExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: AvailablePendingSold
+  graphql:
+    typeName: AvailablePendingSold
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: AvailablePendingSoldBoolExp
+  operand:
+    scalar:
+      type: AvailablePendingSold
+      comparisonOperators: []
+      dataConnectorOperatorMapping:
+        - dataConnectorName: my_openapi
+          dataConnectorScalarType: '"available" | "pending" | "sold"'
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: AvailablePendingSoldBoolExp
+
+---
+kind: ScalarType
+version: v1
+definition:
+  name: PlacedApprovedDelivered
+  graphql:
+    typeName: PlacedApprovedDelivered
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: PlacedApprovedDeliveredBoolExp
+  operand:
+    scalar:
+      type: PlacedApprovedDelivered
+      comparisonOperators: []
+      dataConnectorOperatorMapping:
+        - dataConnectorName: my_openapi
+          dataConnectorScalarType: '"placed" | "approved" | "delivered"'
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: PlacedApprovedDeliveredBoolExp
+

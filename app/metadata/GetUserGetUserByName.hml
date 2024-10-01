@@ -1,0 +1,78 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: User
+  fields:
+    - name: email
+      type: String
+    - name: firstName
+      type: String
+    - name: id
+      type: Float
+    - name: lastName
+      type: String
+    - name: password
+      type: String
+    - name: phone
+      type: String
+    - name: userStatus
+      type: Float
+      description: User Status
+    - name: username
+      type: String
+  graphql:
+    typeName: User
+    inputTypeName: UserInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_openapi
+      dataConnectorObjectType: User
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: User
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - email
+          - firstName
+          - id
+          - lastName
+          - password
+          - phone
+          - userStatus
+          - username
+
+---
+kind: Command
+version: v1
+definition:
+  name: GetUserGetUserByName
+  outputType: User!
+  arguments:
+    - name: headers
+      type: Json
+    - name: username
+      type: String!
+      description: The name that needs to be fetched. Use user1 for testing.
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      function: getUserGetUserByName
+  graphql:
+    rootFieldName: getUserGetUserByName
+    rootFieldKind: Query
+  description: Get user by user name
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: GetUserGetUserByName
+  permissions:
+    - role: admin
+      allowExecution: true
+

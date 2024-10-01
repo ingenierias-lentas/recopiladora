@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeletePetDeletePet
+  outputType: Json!
+  arguments:
+    - name: headers
+      type: Json
+    - name: petId
+      type: Float!
+      description: Pet id to delete
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: deletePetDeletePet
+  graphql:
+    rootFieldName: deletePetDeletePet
+    rootFieldKind: Mutation
+  description: Deletes a pet
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeletePetDeletePet
+  permissions:
+    - role: admin
+      allowExecution: true
+

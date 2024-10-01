@@ -1,0 +1,60 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: GetUserLoginUserQuery
+  fields:
+    - name: password
+      type: String
+      description: The password for login in clear text
+    - name: username
+      type: String
+      description: The user name for login
+  graphql:
+    typeName: GetUserLoginUserQuery
+    inputTypeName: GetUserLoginUserQueryInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_openapi
+      dataConnectorObjectType: getUserLoginUser_query
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: GetUserLoginUserQuery
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - password
+          - username
+
+---
+kind: Command
+version: v1
+definition:
+  name: GetUserLoginUser
+  outputType: String!
+  arguments:
+    - name: headers
+      type: Json
+    - name: query
+      type: GetUserLoginUserQuery!
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      function: getUserLoginUser
+  graphql:
+    rootFieldName: getUserLoginUser
+    rootFieldKind: Query
+  description: Logs user into the system
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: GetUserLoginUser
+  permissions:
+    - role: admin
+      allowExecution: true
+

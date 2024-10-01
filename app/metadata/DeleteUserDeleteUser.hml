@@ -1,0 +1,30 @@
+---
+kind: Command
+version: v1
+definition:
+  name: DeleteUserDeleteUser
+  outputType: Json!
+  arguments:
+    - name: headers
+      type: Json
+    - name: username
+      type: String!
+      description: The name that needs to be deleted
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: deleteUserDeleteUser
+  graphql:
+    rootFieldName: deleteUserDeleteUser
+    rootFieldKind: Mutation
+  description: Delete user
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: DeleteUserDeleteUser
+  permissions:
+    - role: admin
+      allowExecution: true
+

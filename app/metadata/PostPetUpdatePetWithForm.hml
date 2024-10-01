@@ -1,0 +1,63 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: PostPetUpdatePetWithFormQuery
+  fields:
+    - name: name
+      type: String
+      description: Name of pet that needs to be updated
+    - name: status
+      type: String
+      description: Status of pet that needs to be updated
+  graphql:
+    typeName: PostPetUpdatePetWithFormQuery
+    inputTypeName: PostPetUpdatePetWithFormQueryInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_openapi
+      dataConnectorObjectType: postPetUpdatePetWithForm_query
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: PostPetUpdatePetWithFormQuery
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - name
+          - status
+
+---
+kind: Command
+version: v1
+definition:
+  name: PostPetUpdatePetWithForm
+  outputType: Json!
+  arguments:
+    - name: headers
+      type: Json
+    - name: petId
+      type: Float!
+      description: ID of pet that needs to be updated
+    - name: query
+      type: PostPetUpdatePetWithFormQuery!
+  source:
+    dataConnectorName: my_openapi
+    dataConnectorCommand:
+      procedure: postPetUpdatePetWithForm
+  graphql:
+    rootFieldName: postPetUpdatePetWithForm
+    rootFieldKind: Mutation
+  description: Updates a pet in the store with form data
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: PostPetUpdatePetWithForm
+  permissions:
+    - role: admin
+      allowExecution: true
+

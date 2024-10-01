@@ -13,6 +13,14 @@ definition:
       fromEnv: APP_MY_CONNECTOR_READ_URL
     APP_MY_CONNECTOR_WRITE_URL:
       fromEnv: APP_MY_CONNECTOR_WRITE_URL
+    APP_MY_OPENAPI_AUTHORIZATION_HEADER:
+      fromEnv: APP_MY_OPENAPI_AUTHORIZATION_HEADER
+    APP_MY_OPENAPI_READ_URL:
+      fromEnv: APP_MY_OPENAPI_READ_URL
+    APP_MY_OPENAPI_WRITE_URL:
+      fromEnv: APP_MY_OPENAPI_WRITE_URL
   connectors:
     - path: connector/my_connector/connector.yaml
       connectorLinkName: my_connector
+    - path: connector/my_openapi/connector.yaml
+      connectorLinkName: my_openapi

@@ -1,5 +1,6 @@
 include:
   - path: app/connector/my_connector/compose.yaml
+  - path: app/connector/my_openapi/compose.yaml
 services:
   engine:
     build:
