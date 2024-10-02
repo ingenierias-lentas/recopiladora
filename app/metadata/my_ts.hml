@@ -1,0 +1,172 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: my_ts
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: APP_MY_TS_READ_URL
+      write:
+        valueFromEnv: APP_MY_TS_WRITE_URL
+  headers:
+    Authorization:
+      valueFromEnv: APP_MY_TS_AUTHORIZATION_HEADER
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        Float:
+          representation:
+            type: float64
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+        String:
+          representation:
+            type: string
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
+      object_types:
+        Author:
+          fields:
+            first:
+              type:
+                type: named
+                name: String
+            last:
+              type:
+                type: named
+                name: String
+        Planet:
+          fields:
+            climate:
+              type:
+                type: named
+                name: String
+            created:
+              type:
+                type: named
+                name: String
+            diameter:
+              type:
+                type: named
+                name: String
+            edited:
+              type:
+                type: named
+                name: String
+            films:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            gravity:
+              type:
+                type: named
+                name: String
+            name:
+              type:
+                type: named
+                name: String
+            orbital_period:
+              type:
+                type: named
+                name: String
+            population:
+              type:
+                type: named
+                name: String
+            residents:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: String
+            rotation_period:
+              type:
+                type: named
+                name: String
+            surface_water:
+              type:
+                type: named
+                name: String
+            terrain:
+              type:
+                type: named
+                name: String
+            url:
+              type:
+                type: named
+                name: String
+        Todo:
+          fields:
+            author:
+              type:
+                type: named
+                name: Author
+            content:
+              type:
+                type: named
+                name: String
+            id:
+              type:
+                type: named
+                name: Float
+            name:
+              type:
+                type: named
+                name: String
+      collections: []
+      functions:
+        - name: hello
+          arguments:
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: String
+        - name: goodDay
+          arguments:
+            name:
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: String
+          result_type:
+            type: named
+            name: String
+        - name: getPlanetById
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: Planet
+        - name: getTodoById
+          arguments:
+            id:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: named
+            name: Todo
+      procedures: []
+    capabilities:
+      version: 0.1.6
+      capabilities:
+        query:
+          variables: {}
+          nested_fields: {}
+        mutation: {}

@@ -1,0 +1,90 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Author
+  fields:
+    - name: first
+      type: String!
+    - name: last
+      type: String!
+  graphql:
+    typeName: Author
+    inputTypeName: AuthorInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_ts
+      dataConnectorObjectType: Author
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Author
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - first
+          - last
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Todo
+  fields:
+    - name: author
+      type: Author!
+    - name: content
+      type: String!
+    - name: id
+      type: Float!
+    - name: name
+      type: String!
+  graphql:
+    typeName: Todo
+    inputTypeName: TodoInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_ts
+      dataConnectorObjectType: Todo
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Todo
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - author
+          - content
+          - id
+          - name
+
+---
+kind: Command
+version: v1
+definition:
+  name: GetTodoById
+  outputType: Todo!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: my_ts
+    dataConnectorCommand:
+      function: getTodoById
+  graphql:
+    rootFieldName: getTodoById
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: GetTodoById
+  permissions:
+    - role: admin
+      allowExecution: true
+

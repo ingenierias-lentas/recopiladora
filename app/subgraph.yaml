@@ -19,8 +19,16 @@ definition:
       fromEnv: APP_MY_OPENAPI_READ_URL
     APP_MY_OPENAPI_WRITE_URL:
       fromEnv: APP_MY_OPENAPI_WRITE_URL
+    APP_MY_TS_AUTHORIZATION_HEADER:
+      fromEnv: APP_MY_TS_AUTHORIZATION_HEADER
+    APP_MY_TS_READ_URL:
+      fromEnv: APP_MY_TS_READ_URL
+    APP_MY_TS_WRITE_URL:
+      fromEnv: APP_MY_TS_WRITE_URL
   connectors:
     - path: connector/my_connector/connector.yaml
       connectorLinkName: my_connector
     - path: connector/my_openapi/connector.yaml
       connectorLinkName: my_openapi
+    - path: connector/my_ts/connector.yaml
+      connectorLinkName: my_ts

@@ -1,0 +1,26 @@
+---
+kind: Command
+version: v1
+definition:
+  name: GoodDay
+  outputType: String!
+  arguments:
+    - name: name
+      type: String
+  source:
+    dataConnectorName: my_ts
+    dataConnectorCommand:
+      function: goodDay
+  graphql:
+    rootFieldName: goodDay
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: GoodDay
+  permissions:
+    - role: admin
+      allowExecution: true
+

@@ -1,0 +1,134 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Planet
+  fields:
+    - name: climate
+      type: String!
+    - name: created
+      type: String!
+    - name: diameter
+      type: String!
+    - name: edited
+      type: String!
+    - name: films
+      type: "[String!]!"
+    - name: gravity
+      type: String!
+    - name: name
+      type: String!
+    - name: orbitalPeriod
+      type: String!
+    - name: population
+      type: String!
+    - name: residents
+      type: "[String!]!"
+    - name: rotationPeriod
+      type: String!
+    - name: surfaceWater
+      type: String!
+    - name: terrain
+      type: String!
+    - name: url
+      type: String!
+  graphql:
+    typeName: Planet
+    inputTypeName: PlanetInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_ts
+      dataConnectorObjectType: Planet
+      fieldMapping:
+        climate:
+          column:
+            name: climate
+        created:
+          column:
+            name: created
+        diameter:
+          column:
+            name: diameter
+        edited:
+          column:
+            name: edited
+        films:
+          column:
+            name: films
+        gravity:
+          column:
+            name: gravity
+        name:
+          column:
+            name: name
+        orbitalPeriod:
+          column:
+            name: orbital_period
+        population:
+          column:
+            name: population
+        residents:
+          column:
+            name: residents
+        rotationPeriod:
+          column:
+            name: rotation_period
+        surfaceWater:
+          column:
+            name: surface_water
+        terrain:
+          column:
+            name: terrain
+        url:
+          column:
+            name: url
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Planet
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - climate
+          - created
+          - diameter
+          - edited
+          - films
+          - gravity
+          - name
+          - orbitalPeriod
+          - population
+          - residents
+          - rotationPeriod
+          - surfaceWater
+          - terrain
+          - url
+
+---
+kind: Command
+version: v1
+definition:
+  name: GetPlanetById
+  outputType: Planet!
+  arguments:
+    - name: id
+      type: String!
+  source:
+    dataConnectorName: my_ts
+    dataConnectorCommand:
+      function: getPlanetById
+  graphql:
+    rootFieldName: getPlanetById
+    rootFieldKind: Query
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: GetPlanetById
+  permissions:
+    - role: admin
+      allowExecution: true
+
