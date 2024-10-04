@@ -2,3 +2,6 @@ engine/build
 /.env
 /.env.*
 node_modules
+credentials.json
+notes.txt
+query.json

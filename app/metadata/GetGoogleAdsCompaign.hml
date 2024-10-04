@@ -1,0 +1,152 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ArrayCampaignNetworkSettings
+  fields:
+    - name: targetContentNetwork
+      type: Boolean!
+  graphql:
+    typeName: ArrayCampaignNetworkSettings
+    inputTypeName: ArrayCampaignNetworkSettingsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_ts
+      dataConnectorObjectType: array_campaign_networkSettings
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ArrayCampaignNetworkSettings
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - targetContentNetwork
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: ArrayCampaign
+  fields:
+    - name: id
+      type: String!
+    - name: name
+      type: String!
+    - name: networkSettings
+      type: ArrayCampaignNetworkSettings!
+    - name: resourceName
+      type: String!
+  graphql:
+    typeName: ArrayCampaign
+    inputTypeName: ArrayCampaignInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_ts
+      dataConnectorObjectType: array_campaign
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: ArrayCampaign
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - id
+          - name
+          - networkSettings
+          - resourceName
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: FunctionsArray
+  fields:
+    - name: campaign
+      type: ArrayCampaign!
+  graphql:
+    typeName: FunctionsArray
+    inputTypeName: FunctionsArrayInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_ts
+      dataConnectorObjectType: functions_array
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: FunctionsArray
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - campaign
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: FunctionsArray2
+  fields:
+    - name: fieldMask
+      type: String!
+    - name: queryResourceConsumption
+      type: String!
+    - name: requestId
+      type: String!
+    - name: results
+      type: "[FunctionsArray!]!"
+  graphql:
+    typeName: FunctionsArray2
+    inputTypeName: FunctionsArray2Input
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_ts
+      dataConnectorObjectType: functions_array2
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: FunctionsArray2
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - fieldMask
+          - queryResourceConsumption
+          - requestId
+          - results
+
+---
+kind: Command
+version: v1
+definition:
+  name: GetGoogleAdsCompaign
+  outputType: "[FunctionsArray2!]!"
+  source:
+    dataConnectorName: my_ts
+    dataConnectorCommand:
+      function: getGoogleAdsCompaign
+  graphql:
+    rootFieldName: getGoogleAdsCompaign
+    rootFieldKind: Query
+  arguments:
+    - name: authorization
+      type: String!
+    - name: customerId
+      type: String!
+    - name: managerId
+      type: String!
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: GetGoogleAdsCompaign
+  permissions:
+    - role: admin
+      allowExecution: true
+

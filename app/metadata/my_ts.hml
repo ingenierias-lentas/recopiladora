@@ -15,6 +15,13 @@ definition:
     version: v0.1
     schema:
       scalar_types:
+        Boolean:
+          representation:
+            type: boolean
+          aggregate_functions: {}
+          comparison_operators:
+            _eq:
+              type: equal
         Float:
           representation:
             type: float64
@@ -120,6 +127,56 @@ definition:
               type:
                 type: named
                 name: String
+        array_campaign:
+          fields:
+            id:
+              type:
+                type: named
+                name: String
+            name:
+              type:
+                type: named
+                name: String
+            networkSettings:
+              type:
+                type: named
+                name: array_campaign_networkSettings
+            resourceName:
+              type:
+                type: named
+                name: String
+        array_campaign_networkSettings:
+          fields:
+            targetContentNetwork:
+              type:
+                type: named
+                name: Boolean
+        functions_array:
+          fields:
+            campaign:
+              type:
+                type: named
+                name: array_campaign
+        functions_array2:
+          fields:
+            fieldMask:
+              type:
+                type: named
+                name: String
+            queryResourceConsumption:
+              type:
+                type: named
+                name: String
+            requestId:
+              type:
+                type: named
+                name: String
+            results:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: functions_array
       collections: []
       functions:
         - name: hello
@@ -162,6 +219,25 @@ definition:
           result_type:
             type: named
             name: Todo
+        - name: getGoogleAdsCompaign
+          arguments:
+            authorization:
+              type:
+                type: named
+                name: String
+            customerId:
+              type:
+                type: named
+                name: String
+            managerId:
+              type:
+                type: named
+                name: String
+          result_type:
+            type: array
+            element_type:
+              type: named
+              name: functions_array2
       procedures: []
     capabilities:
       version: 0.1.6

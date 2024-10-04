@@ -60,3 +60,44 @@ export async function getTodoById(id: string): Promise<Todo> {
   const json = (await result.json()) as Todo
   return json
 }
+
+type GoogleAdsCampaignResponse = Array<{
+  "results": Array<{
+    "campaign": {
+      "resourceName": string,
+      "networkSettings": {
+        "targetContentNetwork": boolean
+      },
+      "name": string,
+      "id": string,
+    }
+  }>,
+  "fieldMask": string,
+  "requestId": string,
+  "queryResourceConsumption": string,
+}>
+
+
+/**
+ * @readonly Exposes the function as an NDC function (the function should only query data without making modifications)
+ */
+export async function getGoogleAdsCompaign(
+  customerId: string,
+  managerId: string,
+  authorization: string,
+): Promise<GoogleAdsCampaignResponse> {
+  const result = await fetch(`https://googleads.googleapis.com/v17/customers/${customerId}/googleAds:searchStream`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': authorization,
+      'developer-token': process.env.DEVELOPER_TOKEN as string,
+      'login-customer-id': managerId,
+    },
+    body: JSON.stringify({
+      "query": "SELECT campaign.id, campaign.name, campaign.network_settings.target_content_network FROM campaign ORDER BY campaign.id"
+    })
+  })
+  const json = (await result.json()) as GoogleAdsCampaignResponse
+  return json
+}
