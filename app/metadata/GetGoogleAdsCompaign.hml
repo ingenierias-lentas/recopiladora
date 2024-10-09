@@ -134,8 +134,6 @@ definition:
     rootFieldName: getGoogleAdsCompaign
     rootFieldKind: Query
   arguments:
-    - name: authorization
-      type: String!
     - name: customerId
       type: String!
     - name: managerId
@@ -149,4 +147,3 @@ definition:
   permissions:
     - role: admin
       allowExecution: true
-

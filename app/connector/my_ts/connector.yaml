@@ -16,3 +16,9 @@ definition:
       fromEnv: APP_MY_TS_OTEL_SERVICE_NAME
     DEVELOPER_TOKEN:
       fromEnv: APP_MY_TS_DEVELOPER_TOKEN
+    CLIENT_ID:
+      fromEnv: APP_MY_TS_CLIENT_ID
+    CLIENT_SECRET:
+      fromEnv: APP_MY_TS_CLIENT_SECRET
+    REFRESH_TOKEN:
+      fromEnv: APP_MY_TS_REFRESH_TOKEN

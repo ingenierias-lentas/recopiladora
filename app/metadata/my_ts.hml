@@ -221,10 +221,6 @@ definition:
             name: Todo
         - name: getGoogleAdsCompaign
           arguments:
-            authorization:
-              type:
-                type: named
-                name: String
             customerId:
               type:
                 type: named

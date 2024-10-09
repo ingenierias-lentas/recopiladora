@@ -84,13 +84,24 @@ type GoogleAdsCampaignResponse = Array<{
 export async function getGoogleAdsCompaign(
   customerId: string,
   managerId: string,
-  authorization: string,
 ): Promise<GoogleAdsCampaignResponse> {
+  const accessTokenResponse = await fetch('https://www.googleapis.com/oauth2/v3/token', {
+    method: 'POST',
+    body: JSON.stringify({
+      grant_type: 'refresh_token',
+      client_id: process.env.CLIENT_ID as string,
+      client_secret: process.env.CLIENT_SECRET as string,
+      refresh_token: process.env.REFRESH_TOKEN as string,
+    })
+  })
+
+  const { access_token: accessToken } = (await accessTokenResponse.json()) as { access_token: string }
+
   const result = await fetch(`https://googleads.googleapis.com/v17/customers/${customerId}/googleAds:searchStream`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': authorization,
+      'Authorization': `Bearer ${accessToken}`,
       'developer-token': process.env.DEVELOPER_TOKEN as string,
       'login-customer-id': managerId,
     },
