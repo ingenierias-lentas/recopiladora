@@ -1,0 +1,1 @@
+console.log('datastore/lib/index.ts');

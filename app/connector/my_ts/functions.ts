@@ -109,6 +109,5 @@ export async function getGoogleAdsCompaign(
       "query": "SELECT campaign.id, campaign.name, campaign.network_settings.target_content_network FROM campaign ORDER BY campaign.id"
     })
   })
-  const json = (await result.json()) as GoogleAdsCampaignResponse
-  return json
+  return (await result.json()) as GoogleAdsCampaignResponse
 }
