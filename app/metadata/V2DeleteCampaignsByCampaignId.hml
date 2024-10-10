@@ -1,0 +1,72 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: V2DeleteCampaignsByCampaignIdResponse
+  description: Responses from the 'v2_delete_campaigns_by_campaign_id' procedure
+  fields:
+    - name: affectedRows
+      type: Int4_1!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Campaigns!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: V2DeleteCampaignsByCampaignIdResponse
+    inputTypeName: V2DeleteCampaignsByCampaignIdResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_datastore
+      dataConnectorObjectType: v2_delete_campaigns_by_campaign_id_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: V2DeleteCampaignsByCampaignIdResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: V2DeleteCampaignsByCampaignId
+  outputType: V2DeleteCampaignsByCampaignIdResponse!
+  arguments:
+    - name: keyCampaignId
+      type: Varchar!
+    - name: preCheck
+      type: CampaignsBoolExp!
+      description: Delete permission predicate over the 'campaigns' collection
+  source:
+    dataConnectorName: my_datastore
+    dataConnectorCommand:
+      procedure: v2_delete_campaigns_by_campaign_id
+    argumentMapping:
+      keyCampaignId: key_campaign_id
+      preCheck: pre_check
+  graphql:
+    rootFieldName: v2DeleteCampaignsByCampaignId
+    rootFieldKind: Mutation
+  description: Delete any row on the 'campaigns' collection using the 'campaign_id' key
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: V2DeleteCampaignsByCampaignId
+  permissions:
+    - role: admin
+      allowExecution: true
+

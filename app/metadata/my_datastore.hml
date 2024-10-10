@@ -1,0 +1,419 @@
+kind: DataConnectorLink
+version: v1
+definition:
+  name: my_datastore
+  url:
+    readWriteUrls:
+      read:
+        valueFromEnv: APP_MY_DATASTORE_READ_URL
+      write:
+        valueFromEnv: APP_MY_DATASTORE_WRITE_URL
+  headers:
+    Authorization:
+      valueFromEnv: APP_MY_DATASTORE_AUTHORIZATION_HEADER
+  schema:
+    version: v0.1
+    schema:
+      scalar_types:
+        int4:
+          representation:
+            type: int32
+          aggregate_functions: {}
+          comparison_operators: {}
+        text:
+          representation:
+            type: string
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: text
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: text
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _ilike:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _in:
+              type: in
+            _iregex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _like:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _nilike:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _niregex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _nlike:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _nregex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            _regex:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            starts_with:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+            ts_match_tt:
+              type: custom
+              argument_type:
+                type: named
+                name: text
+        varchar:
+          representation:
+            type: string
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: text
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: text
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _ilike:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _in:
+              type: in
+            _iregex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _like:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _nilike:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _niregex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _nlike:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _nregex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            _regex:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            starts_with:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+            ts_match_tt:
+              type: custom
+              argument_type:
+                type: named
+                name: varchar
+      object_types:
+        campaigns:
+          fields:
+            campaign_id:
+              type:
+                type: named
+                name: varchar
+            customer_id:
+              type:
+                type: named
+                name: varchar
+            name:
+              type:
+                type: named
+                name: varchar
+        update_column_campaigns_campaign_id:
+          description: Update the 'campaign_id' column in the 'campaigns' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: varchar
+        update_column_campaigns_customer_id:
+          description: Update the 'customer_id' column in the 'campaigns' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: varchar
+        update_column_campaigns_name:
+          description: Update the 'name' column in the 'campaigns' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: varchar
+        v2_delete_campaigns_by_campaign_id_response:
+          description: Responses from the 'v2_delete_campaigns_by_campaign_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                type: named
+                name: int4
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: campaigns
+        v2_insert_campaigns_object:
+          fields:
+            campaign_id:
+              type:
+                type: named
+                name: varchar
+            customer_id:
+              type:
+                type: named
+                name: varchar
+            name:
+              type:
+                type: named
+                name: varchar
+        v2_insert_campaigns_response:
+          description: Responses from the 'v2_insert_campaigns' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                type: named
+                name: int4
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: campaigns
+        v2_update_campaigns_by_campaign_id_response:
+          description: Responses from the 'v2_update_campaigns_by_campaign_id' procedure
+          fields:
+            affected_rows:
+              description: The number of rows affected by the mutation
+              type:
+                type: named
+                name: int4
+            returning:
+              description: Data from rows affected by the mutation
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: campaigns
+        v2_update_campaigns_by_campaign_id_update_columns:
+          description: Update the columns of the 'campaigns' collection
+          fields:
+            campaign_id:
+              description: Update the 'campaign_id' column in the 'campaigns' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_campaigns_campaign_id
+            customer_id:
+              description: Update the 'customer_id' column in the 'campaigns' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_campaigns_customer_id
+            name:
+              description: Update the 'name' column in the 'campaigns' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_campaigns_name
+      collections:
+        - name: campaigns
+          arguments: {}
+          type: campaigns
+          uniqueness_constraints:
+            campaigns_pkey:
+              unique_columns:
+                - campaign_id
+          foreign_keys: {}
+      functions: []
+      procedures:
+        - name: v2_delete_campaigns_by_campaign_id
+          description: Delete any row on the 'campaigns' collection using the 'campaign_id' key
+          arguments:
+            key_campaign_id:
+              type:
+                type: named
+                name: varchar
+            pre_check:
+              description: Delete permission predicate over the 'campaigns' collection
+              type:
+                type: predicate
+                object_type_name: campaigns
+          result_type:
+            type: named
+            name: v2_delete_campaigns_by_campaign_id_response
+        - name: v2_insert_campaigns
+          description: Insert into the campaigns table
+          arguments:
+            objects:
+              type:
+                type: array
+                element_type:
+                  type: named
+                  name: v2_insert_campaigns_object
+            post_check:
+              description: Insert permission predicate over the 'campaigns' collection
+              type:
+                type: predicate
+                object_type_name: campaigns
+          result_type:
+            type: named
+            name: v2_insert_campaigns_response
+        - name: v2_update_campaigns_by_campaign_id
+          description: Update any row on the 'campaigns' collection using the 'campaign_id' key
+          arguments:
+            key_campaign_id:
+              type:
+                type: named
+                name: varchar
+            post_check:
+              description: Update permission post-condition predicate over the 'campaigns' collection
+              type:
+                type: predicate
+                object_type_name: campaigns
+            pre_check:
+              description: Update permission pre-condition predicate over the 'campaigns' collection
+              type:
+                type: predicate
+                object_type_name: campaigns
+            update_columns:
+              type:
+                type: named
+                name: v2_update_campaigns_by_campaign_id_update_columns
+          result_type:
+            type: named
+            name: v2_update_campaigns_by_campaign_id_response
+    capabilities:
+      version: 0.1.6
+      capabilities:
+        query:
+          aggregates: {}
+          variables: {}
+          explain: {}
+          nested_fields:
+            filter_by: {}
+            order_by: {}
+        mutation:
+          transactional: {}
+          explain: {}
+        relationships:
+          relation_comparisons: {}
+          order_by_aggregate: {}

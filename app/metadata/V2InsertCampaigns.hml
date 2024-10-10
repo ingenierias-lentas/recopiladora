@@ -1,0 +1,114 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: V2InsertCampaignsObject
+  fields:
+    - name: campaignId
+      type: Varchar!
+    - name: customerId
+      type: Varchar!
+    - name: name
+      type: Varchar!
+  graphql:
+    typeName: V2InsertCampaignsObject
+    inputTypeName: V2InsertCampaignsObjectInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_datastore
+      dataConnectorObjectType: v2_insert_campaigns_object
+      fieldMapping:
+        campaignId:
+          column:
+            name: campaign_id
+        customerId:
+          column:
+            name: customer_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: V2InsertCampaignsObject
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - campaignId
+          - customerId
+          - name
+
+---
+kind: ObjectType
+version: v1
+definition:
+  name: V2InsertCampaignsResponse
+  description: Responses from the 'v2_insert_campaigns' procedure
+  fields:
+    - name: affectedRows
+      type: Int4_1!
+      description: The number of rows affected by the mutation
+    - name: returning
+      type: "[Campaigns!]!"
+      description: Data from rows affected by the mutation
+  graphql:
+    typeName: V2InsertCampaignsResponse
+    inputTypeName: V2InsertCampaignsResponseInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_datastore
+      dataConnectorObjectType: v2_insert_campaigns_response
+      fieldMapping:
+        affectedRows:
+          column:
+            name: affected_rows
+        returning:
+          column:
+            name: returning
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: V2InsertCampaignsResponse
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - affectedRows
+          - returning
+
+---
+kind: Command
+version: v1
+definition:
+  name: V2InsertCampaigns
+  outputType: V2InsertCampaignsResponse!
+  arguments:
+    - name: objects
+      type: "[V2InsertCampaignsObject!]!"
+    - name: postCheck
+      type: CampaignsBoolExp!
+      description: Insert permission predicate over the 'campaigns' collection
+  source:
+    dataConnectorName: my_datastore
+    dataConnectorCommand:
+      procedure: v2_insert_campaigns
+    argumentMapping:
+      objects: objects
+      postCheck: post_check
+  graphql:
+    rootFieldName: v2InsertCampaigns
+    rootFieldKind: Mutation
+  description: Insert into the campaigns table
+
+---
+kind: CommandPermissions
+version: v1
+definition:
+  commandName: V2InsertCampaigns
+  permissions:
+    - role: admin
+      allowExecution: true
+

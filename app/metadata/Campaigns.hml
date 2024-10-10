@@ -1,0 +1,128 @@
+---
+kind: ObjectType
+version: v1
+definition:
+  name: Campaigns
+  fields:
+    - name: campaignId
+      type: Varchar!
+    - name: customerId
+      type: Varchar!
+    - name: name
+      type: Varchar!
+  graphql:
+    typeName: Campaigns
+    inputTypeName: CampaignsInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_datastore
+      dataConnectorObjectType: campaigns
+      fieldMapping:
+        campaignId:
+          column:
+            name: campaign_id
+        customerId:
+          column:
+            name: customer_id
+        name:
+          column:
+            name: name
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: Campaigns
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - campaignId
+          - customerId
+          - name
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: CampaignsBoolExp
+  operand:
+    object:
+      type: Campaigns
+      comparableFields:
+        - fieldName: campaignId
+          booleanExpressionType: VarcharBoolExp
+        - fieldName: customerId
+          booleanExpressionType: VarcharBoolExp
+        - fieldName: name
+          booleanExpressionType: VarcharBoolExp
+      comparableRelationships: []
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: CampaignsBoolExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: CampaignsAggExp
+  operand:
+    object:
+      aggregatedType: Campaigns
+      aggregatableFields:
+        - fieldName: campaignId
+          aggregateExpression: VarcharAggExp
+        - fieldName: customerId
+          aggregateExpression: VarcharAggExp
+        - fieldName: name
+          aggregateExpression: VarcharAggExp
+  count:
+    enable: true
+  graphql:
+    selectTypeName: CampaignsAggExp
+
+---
+kind: Model
+version: v1
+definition:
+  name: Campaigns
+  objectType: Campaigns
+  source:
+    dataConnectorName: my_datastore
+    collection: campaigns
+  filterExpressionType: CampaignsBoolExp
+  aggregateExpression: CampaignsAggExp
+  orderableFields:
+    - fieldName: campaignId
+      orderByDirections:
+        enableAll: true
+    - fieldName: customerId
+      orderByDirections:
+        enableAll: true
+    - fieldName: name
+      orderByDirections:
+        enableAll: true
+  graphql:
+    selectMany:
+      queryRootField: campaigns
+    selectUniques:
+      - queryRootField: campaignsByCampaignId
+        uniqueIdentifier:
+          - campaignId
+    orderByExpressionType: CampaignsOrderBy
+    filterInputTypeName: CampaignsFilterInput
+    aggregate:
+      queryRootField: campaignsAggregate
+
+---
+kind: ModelPermissions
+version: v1
+definition:
+  modelName: Campaigns
+  permissions:
+    - role: admin
+      select:
+        filter: null
+
