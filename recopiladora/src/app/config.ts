@@ -1,5 +1,9 @@
 const getPort = function (): number {
-  return Number(process.env.PORT) || 3000;
+  return Number(process.env.PORT) || 3001;
+}
+
+const getApiHost = function (): string {
+  return process.env.API_HOST || 'localhost'
 }
 
 const getApiUrl = function (): string {
@@ -7,4 +11,4 @@ const getApiUrl = function (): string {
   return `http://${host}:${getPort()}`
 }
 
-export { getApiUrl, getPort }
+export { getApiUrl, getPort, getApiHost }

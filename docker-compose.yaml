@@ -1,0 +1,3 @@
+include:
+  - path: hasura/compose.yaml
+  - path: recopiladora/docker-compose.dev.yaml
