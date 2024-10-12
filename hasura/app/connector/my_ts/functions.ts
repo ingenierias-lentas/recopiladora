@@ -81,7 +81,7 @@ type GoogleAdsCampaignResponse = Array<{
 /**
  * @readonly Exposes the function as an NDC function (the function should only query data without making modifications)
  */
-export async function getGoogleAdsCompaign(
+export async function getGoogleAdsCampaign(
   customerId: string,
   managerId: string,
 ): Promise<GoogleAdsCampaignResponse> {

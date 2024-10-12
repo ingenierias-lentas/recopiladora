@@ -124,14 +124,14 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: GetGoogleAdsCompaign
+  name: getGoogleAdsCampaign
   outputType: "[FunctionsArray2!]!"
   source:
     dataConnectorName: my_ts
     dataConnectorCommand:
-      function: getGoogleAdsCompaign
+      function: getGoogleAdsCampaign
   graphql:
-    rootFieldName: getGoogleAdsCompaign
+    rootFieldName: getGoogleAdsCampaign
     rootFieldKind: Query
   arguments:
     - name: customerId
@@ -143,7 +143,7 @@ definition:
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: GetGoogleAdsCompaign
+  commandName: getGoogleAdsCampaign
   permissions:
     - role: admin
       allowExecution: true
