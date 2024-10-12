@@ -13,13 +13,14 @@ fastify.get('/health', async (_, res) => {
 
 fastify.get('/collectdata', async (_, res) => {
   try {
-    services.collectData()
+    const response = await services.collectData()
+    res.code(201)
+    return { response }
   } catch (error) {
     res.code(500)
+    console.error(error)
     return { message: 'server error' }
   }
-  res.code(201)
-  return { message: 'created' }
 })
 
 try {
