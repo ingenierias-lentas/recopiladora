@@ -64,6 +64,48 @@ definition:
 kind: ScalarType
 version: v1
 definition:
+  name: Timestamptz_1
+  graphql:
+    typeName: Timestamptz1
+
+---
+kind: BooleanExpressionType
+version: v1
+definition:
+  name: TimestamptzBoolExp_1
+  operand:
+    scalar:
+      type: Timestamptz_1
+      comparisonOperators:
+        - name: _eq
+          argumentType: Timestamptz_1!
+        - name: _gt
+          argumentType: Timestamptz_1!
+        - name: _gte
+          argumentType: Timestamptz_1!
+        - name: _in
+          argumentType: Timestamptz_1!
+        - name: _lt
+          argumentType: Timestamptz_1!
+        - name: _lte
+          argumentType: Timestamptz_1!
+        - name: _neq
+          argumentType: Timestamptz_1!
+      dataConnectorOperatorMapping:
+        - dataConnectorName: my_datastore
+          dataConnectorScalarType: timestamptz
+          operatorMapping: {}
+  logicalOperators:
+    enable: true
+  isNull:
+    enable: true
+  graphql:
+    typeName: TimestamptzBoolExp1
+
+---
+kind: ScalarType
+version: v1
+definition:
   name: Text_1
   graphql:
     typeName: Text1
@@ -159,6 +201,44 @@ definition:
     enable: true
   graphql:
     selectTypeName: VarcharAggExp
+
+---
+kind: DataConnectorScalarRepresentation
+version: v1
+definition:
+  dataConnectorName: my_datastore
+  dataConnectorScalarType: timestamptz
+  representation: Timestamptz_1
+  graphql:
+    comparisonExpressionTypeName: Timestamptz1ComparisonExp
+
+---
+kind: AggregateExpression
+version: v1
+definition:
+  name: TimestamptzAggExp_1
+  operand:
+    scalar:
+      aggregatedType: Timestamptz_1
+      aggregationFunctions:
+        - name: max
+          returnType: Timestamptz_1
+        - name: min
+          returnType: Timestamptz_1
+      dataConnectorAggregationFunctionMapping:
+        - dataConnectorName: my_datastore
+          dataConnectorScalarType: timestamptz
+          functionMapping:
+            max:
+              name: max
+            min:
+              name: min
+  count:
+    enable: true
+  countDistinct:
+    enable: true
+  graphql:
+    selectTypeName: TimestamptzAggExp1
 
 ---
 kind: ScalarType

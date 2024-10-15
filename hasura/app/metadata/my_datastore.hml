@@ -116,6 +116,52 @@ definition:
               argument_type:
                 type: named
                 name: text
+        timestamptz:
+          representation:
+            type: timestamptz
+          aggregate_functions:
+            max:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: timestamptz
+            min:
+              result_type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: timestamptz
+          comparison_operators:
+            _eq:
+              type: equal
+            _gt:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
+            _gte:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
+            _in:
+              type: in
+            _lt:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
+            _lte:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
+            _neq:
+              type: custom
+              argument_type:
+                type: named
+                name: timestamptz
         varchar:
           representation:
             type: string
@@ -219,6 +265,10 @@ definition:
               type:
                 type: named
                 name: varchar
+            created_at:
+              type:
+                type: named
+                name: timestamptz
             customer_id:
               type:
                 type: named
@@ -235,6 +285,14 @@ definition:
               type:
                 type: named
                 name: varchar
+        update_column_campaigns_created_at:
+          description: Update the 'created_at' column in the 'campaigns' collection
+          fields:
+            _set:
+              description: Set the column to this value
+              type:
+                type: named
+                name: timestamptz
         update_column_campaigns_customer_id:
           description: Update the 'customer_id' column in the 'campaigns' collection
           fields:
@@ -251,8 +309,8 @@ definition:
               type:
                 type: named
                 name: varchar
-        v2_delete_campaigns_by_campaign_id_response:
-          description: Responses from the 'v2_delete_campaigns_by_campaign_id' procedure
+        v2_delete_campaigns_by_campaign_id_and_created_at_response:
+          description: Responses from the 'v2_delete_campaigns_by_campaign_id_and_created_at' procedure
           fields:
             affected_rows:
               description: The number of rows affected by the mutation
@@ -272,6 +330,10 @@ definition:
               type:
                 type: named
                 name: varchar
+            created_at:
+              type:
+                type: named
+                name: timestamptz
             customer_id:
               type:
                 type: named
@@ -295,8 +357,8 @@ definition:
                 element_type:
                   type: named
                   name: campaigns
-        v2_update_campaigns_by_campaign_id_response:
-          description: Responses from the 'v2_update_campaigns_by_campaign_id' procedure
+        v2_update_campaigns_by_campaign_id_and_created_at_response:
+          description: Responses from the 'v2_update_campaigns_by_campaign_id_and_created_at' procedure
           fields:
             affected_rows:
               description: The number of rows affected by the mutation
@@ -310,7 +372,7 @@ definition:
                 element_type:
                   type: named
                   name: campaigns
-        v2_update_campaigns_by_campaign_id_update_columns:
+        v2_update_campaigns_by_campaign_id_and_created_at_update_columns:
           description: Update the columns of the 'campaigns' collection
           fields:
             campaign_id:
@@ -320,6 +382,13 @@ definition:
                 underlying_type:
                   type: named
                   name: update_column_campaigns_campaign_id
+            created_at:
+              description: Update the 'created_at' column in the 'campaigns' collection.
+              type:
+                type: nullable
+                underlying_type:
+                  type: named
+                  name: update_column_campaigns_created_at
             customer_id:
               description: Update the 'customer_id' column in the 'campaigns' collection.
               type:
@@ -342,16 +411,21 @@ definition:
             campaigns_pkey:
               unique_columns:
                 - campaign_id
+                - created_at
           foreign_keys: {}
       functions: []
       procedures:
-        - name: v2_delete_campaigns_by_campaign_id
-          description: Delete any row on the 'campaigns' collection using the 'campaign_id' key
+        - name: v2_delete_campaigns_by_campaign_id_and_created_at
+          description: Delete any row on the 'campaigns' collection using the 'campaign_id' and 'created_at' keys
           arguments:
             key_campaign_id:
               type:
                 type: named
                 name: varchar
+            key_created_at:
+              type:
+                type: named
+                name: timestamptz
             pre_check:
               description: Delete permission predicate over the 'campaigns' collection
               type:
@@ -359,7 +433,7 @@ definition:
                 object_type_name: campaigns
           result_type:
             type: named
-            name: v2_delete_campaigns_by_campaign_id_response
+            name: v2_delete_campaigns_by_campaign_id_and_created_at_response
         - name: v2_insert_campaigns
           description: Insert into the campaigns table
           arguments:
@@ -377,13 +451,17 @@ definition:
           result_type:
             type: named
             name: v2_insert_campaigns_response
-        - name: v2_update_campaigns_by_campaign_id
-          description: Update any row on the 'campaigns' collection using the 'campaign_id' key
+        - name: v2_update_campaigns_by_campaign_id_and_created_at
+          description: Update any row on the 'campaigns' collection using the 'campaign_id' and 'created_at' keys
           arguments:
             key_campaign_id:
               type:
                 type: named
                 name: varchar
+            key_created_at:
+              type:
+                type: named
+                name: timestamptz
             post_check:
               description: Update permission post-condition predicate over the 'campaigns' collection
               type:
@@ -397,10 +475,10 @@ definition:
             update_columns:
               type:
                 type: named
-                name: v2_update_campaigns_by_campaign_id_update_columns
+                name: v2_update_campaigns_by_campaign_id_and_created_at_update_columns
           result_type:
             type: named
-            name: v2_update_campaigns_by_campaign_id_response
+            name: v2_update_campaigns_by_campaign_id_and_created_at_response
     capabilities:
       version: 0.1.6
       capabilities:

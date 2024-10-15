@@ -5,8 +5,6 @@ services:
       dockerfile_inline: |-
         FROM ghcr.io/hasura/ndc-postgres:v1.1.1
         COPY ./ /etc/connector
-    depends_on:
-      - postgres_datastore
     develop:
       watch:
         - path: ./
@@ -22,5 +20,5 @@ services:
     ports:
       - mode: ingress
         target: 8080
-        published: "7224"
+        published: "8577"
         protocol: tcp

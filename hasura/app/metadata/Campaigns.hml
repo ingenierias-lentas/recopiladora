@@ -6,6 +6,8 @@ definition:
   fields:
     - name: campaignId
       type: Varchar!
+    - name: createdAt
+      type: Timestamptz_1!
     - name: customerId
       type: Varchar!
     - name: name
@@ -20,6 +22,9 @@ definition:
         campaignId:
           column:
             name: campaign_id
+        createdAt:
+          column:
+            name: created_at
         customerId:
           column:
             name: customer_id
@@ -37,6 +42,7 @@ definition:
       output:
         allowedFields:
           - campaignId
+          - createdAt
           - customerId
           - name
 
@@ -51,6 +57,8 @@ definition:
       comparableFields:
         - fieldName: campaignId
           booleanExpressionType: VarcharBoolExp
+        - fieldName: createdAt
+          booleanExpressionType: TimestamptzBoolExp_1
         - fieldName: customerId
           booleanExpressionType: VarcharBoolExp
         - fieldName: name
@@ -74,6 +82,8 @@ definition:
       aggregatableFields:
         - fieldName: campaignId
           aggregateExpression: VarcharAggExp
+        - fieldName: createdAt
+          aggregateExpression: TimestamptzAggExp_1
         - fieldName: customerId
           aggregateExpression: VarcharAggExp
         - fieldName: name
@@ -98,6 +108,9 @@ definition:
     - fieldName: campaignId
       orderByDirections:
         enableAll: true
+    - fieldName: createdAt
+      orderByDirections:
+        enableAll: true
     - fieldName: customerId
       orderByDirections:
         enableAll: true
@@ -108,9 +121,10 @@ definition:
     selectMany:
       queryRootField: campaigns
     selectUniques:
-      - queryRootField: campaignsByCampaignId
+      - queryRootField: campaignsByCampaignsPkey
         uniqueIdentifier:
           - campaignId
+          - createdAt
     orderByExpressionType: CampaignsOrderBy
     filterInputTypeName: CampaignsFilterInput
     aggregate:

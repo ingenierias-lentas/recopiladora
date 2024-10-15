@@ -27,22 +27,16 @@ const collectData = async function () {
     }
   `) as CampaignDataResponse
 
-  console.log("response:", response)
+  const currentDate = (new Date()).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', timeZoneName: 'short' })
 
   const campaigns = response.getGoogleAdsCampaign[0].results.map(campaign => {
     return {
       campaignId: campaign.campaign.id,
       customerId: '4524698454',
       name: campaign.campaign.name,
+      createdAt: currentDate,
     }
   })
-
-  // return campaigns
-  // const campaigns = [{
-  //   "campaignId": "21776180636",
-  //   "customerId": "4524698454",
-  //   "name": "Test-Sales-Search-1",
-  // }]
 
   return await request('http://engine:3000/graphql', gql`
     mutation MyMutation($objects: [V2InsertCampaignsObjectInput!]!) {
