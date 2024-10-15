@@ -2,8 +2,9 @@
 kind: ObjectType
 version: v1
 definition:
-  name: V2DeleteCampaignsByCampaignIdResponse
-  description: Responses from the 'v2_delete_campaigns_by_campaign_id' procedure
+  name: V2DeleteCampaignsByCampaignIdAndCreatedAtResponse
+  description: Responses from the
+    'v2_delete_campaigns_by_campaign_id_and_created_at' procedure
   fields:
     - name: affectedRows
       type: Int4_1!
@@ -12,11 +13,11 @@ definition:
       type: "[Campaigns!]!"
       description: Data from rows affected by the mutation
   graphql:
-    typeName: V2DeleteCampaignsByCampaignIdResponse
-    inputTypeName: V2DeleteCampaignsByCampaignIdResponseInput
+    typeName: V2DeleteCampaignsByCampaignIdAndCreatedAtResponse
+    inputTypeName: V2DeleteCampaignsByCampaignIdAndCreatedAtResponseInput
   dataConnectorTypeMapping:
     - dataConnectorName: my_datastore
-      dataConnectorObjectType: v2_delete_campaigns_by_campaign_id_response
+      dataConnectorObjectType: v2_delete_campaigns_by_campaign_id_and_created_at_response
       fieldMapping:
         affectedRows:
           column:
@@ -29,7 +30,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: V2DeleteCampaignsByCampaignIdResponse
+  typeName: V2DeleteCampaignsByCampaignIdAndCreatedAtResponse
   permissions:
     - role: admin
       output:
@@ -41,31 +42,35 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: V2DeleteCampaignsByCampaignId
-  outputType: V2DeleteCampaignsByCampaignIdResponse!
+  name: V2DeleteCampaignsByCampaignIdAndCreatedAt
+  outputType: V2DeleteCampaignsByCampaignIdAndCreatedAtResponse!
   arguments:
     - name: keyCampaignId
       type: Varchar!
+    - name: keyCreatedAt
+      type: Timestamptz_1!
     - name: preCheck
       type: CampaignsBoolExp!
       description: Delete permission predicate over the 'campaigns' collection
   source:
     dataConnectorName: my_datastore
     dataConnectorCommand:
-      procedure: v2_delete_campaigns_by_campaign_id
+      procedure: v2_delete_campaigns_by_campaign_id_and_created_at
     argumentMapping:
       keyCampaignId: key_campaign_id
+      keyCreatedAt: key_created_at
       preCheck: pre_check
   graphql:
-    rootFieldName: v2DeleteCampaignsByCampaignId
+    rootFieldName: v2DeleteCampaignsByCampaignIdAndCreatedAt
     rootFieldKind: Mutation
-  description: Delete any row on the 'campaigns' collection using the 'campaign_id' key
+  description: Delete any row on the 'campaigns' collection using the
+    'campaign_id' and 'created_at' keys
 
 ---
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: V2DeleteCampaignsByCampaignId
+  commandName: V2DeleteCampaignsByCampaignIdAndCreatedAt
   permissions:
     - role: admin
       allowExecution: true

@@ -1,0 +1,6 @@
+services:
+  recopiladora:
+    extends:
+      file: ./docker-compose.yaml
+      service: recopiladora
+    entrypoint: ["npm", "run", "dev"]

@@ -2,7 +2,6 @@ include:
   - path: app/connector/my_connector/compose.yaml
   - path: app/connector/my_openapi/compose.yaml
   - path: app/connector/my_ts/compose.yaml
-  - path: datastore/compose.yaml
   - path: app/connector/my_datastore/compose.yaml
 services:
   engine:

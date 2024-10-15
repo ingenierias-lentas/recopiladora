@@ -1,3 +1,0 @@
-services:
-  app:
-    entrypoint: ["npm", "run", "dev"]

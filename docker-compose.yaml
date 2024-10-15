@@ -1,0 +1,4 @@
+include:
+  - path: datastore/compose.yaml
+  - path: recopiladora/docker-compose.dev.yaml
+  - path: hasura/compose.yaml

@@ -34,6 +34,38 @@ definition:
 kind: ObjectType
 version: v1
 definition:
+  name: UpdateColumnCampaignsCreatedAt
+  description: Update the 'created_at' column in the 'campaigns' collection
+  fields:
+    - name: set
+      type: Timestamptz_1!
+      description: Set the column to this value
+  graphql:
+    typeName: UpdateColumnCampaignsCreatedAt
+    inputTypeName: UpdateColumnCampaignsCreatedAtInput
+  dataConnectorTypeMapping:
+    - dataConnectorName: my_datastore
+      dataConnectorObjectType: update_column_campaigns_created_at
+      fieldMapping:
+        set:
+          column:
+            name: _set
+
+---
+kind: TypePermissions
+version: v1
+definition:
+  typeName: UpdateColumnCampaignsCreatedAt
+  permissions:
+    - role: admin
+      output:
+        allowedFields:
+          - set
+
+---
+kind: ObjectType
+version: v1
+definition:
   name: UpdateColumnCampaignsCustomerId
   description: Update the 'customer_id' column in the 'campaigns' collection
   fields:
@@ -98,12 +130,15 @@ definition:
 kind: ObjectType
 version: v1
 definition:
-  name: V2UpdateCampaignsByCampaignIdUpdateColumns
+  name: V2UpdateCampaignsByCampaignIdAndCreatedAtUpdateColumns
   description: Update the columns of the 'campaigns' collection
   fields:
     - name: campaignId
       type: UpdateColumnCampaignsCampaignId
       description: Update the 'campaign_id' column in the 'campaigns' collection.
+    - name: createdAt
+      type: UpdateColumnCampaignsCreatedAt
+      description: Update the 'created_at' column in the 'campaigns' collection.
     - name: customerId
       type: UpdateColumnCampaignsCustomerId
       description: Update the 'customer_id' column in the 'campaigns' collection.
@@ -111,15 +146,18 @@ definition:
       type: UpdateColumnCampaignsName
       description: Update the 'name' column in the 'campaigns' collection.
   graphql:
-    typeName: V2UpdateCampaignsByCampaignIdUpdateColumns
-    inputTypeName: V2UpdateCampaignsByCampaignIdUpdateColumnsInput
+    typeName: V2UpdateCampaignsByCampaignIdAndCreatedAtUpdateColumns
+    inputTypeName: V2UpdateCampaignsByCampaignIdAndCreatedAtUpdateColumnsInput
   dataConnectorTypeMapping:
     - dataConnectorName: my_datastore
-      dataConnectorObjectType: v2_update_campaigns_by_campaign_id_update_columns
+      dataConnectorObjectType: v2_update_campaigns_by_campaign_id_and_created_at_update_columns
       fieldMapping:
         campaignId:
           column:
             name: campaign_id
+        createdAt:
+          column:
+            name: created_at
         customerId:
           column:
             name: customer_id
@@ -131,12 +169,13 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: V2UpdateCampaignsByCampaignIdUpdateColumns
+  typeName: V2UpdateCampaignsByCampaignIdAndCreatedAtUpdateColumns
   permissions:
     - role: admin
       output:
         allowedFields:
           - campaignId
+          - createdAt
           - customerId
           - name
 
@@ -144,8 +183,9 @@ definition:
 kind: ObjectType
 version: v1
 definition:
-  name: V2UpdateCampaignsByCampaignIdResponse
-  description: Responses from the 'v2_update_campaigns_by_campaign_id' procedure
+  name: V2UpdateCampaignsByCampaignIdAndCreatedAtResponse
+  description: Responses from the
+    'v2_update_campaigns_by_campaign_id_and_created_at' procedure
   fields:
     - name: affectedRows
       type: Int4_1!
@@ -154,11 +194,11 @@ definition:
       type: "[Campaigns!]!"
       description: Data from rows affected by the mutation
   graphql:
-    typeName: V2UpdateCampaignsByCampaignIdResponse
-    inputTypeName: V2UpdateCampaignsByCampaignIdResponseInput
+    typeName: V2UpdateCampaignsByCampaignIdAndCreatedAtResponse
+    inputTypeName: V2UpdateCampaignsByCampaignIdAndCreatedAtResponseInput
   dataConnectorTypeMapping:
     - dataConnectorName: my_datastore
-      dataConnectorObjectType: v2_update_campaigns_by_campaign_id_response
+      dataConnectorObjectType: v2_update_campaigns_by_campaign_id_and_created_at_response
       fieldMapping:
         affectedRows:
           column:
@@ -171,7 +211,7 @@ definition:
 kind: TypePermissions
 version: v1
 definition:
-  typeName: V2UpdateCampaignsByCampaignIdResponse
+  typeName: V2UpdateCampaignsByCampaignIdAndCreatedAtResponse
   permissions:
     - role: admin
       output:
@@ -183,11 +223,13 @@ definition:
 kind: Command
 version: v1
 definition:
-  name: V2UpdateCampaignsByCampaignId
-  outputType: V2UpdateCampaignsByCampaignIdResponse!
+  name: V2UpdateCampaignsByCampaignIdAndCreatedAt
+  outputType: V2UpdateCampaignsByCampaignIdAndCreatedAtResponse!
   arguments:
     - name: keyCampaignId
       type: Varchar!
+    - name: keyCreatedAt
+      type: Timestamptz_1!
     - name: postCheck
       type: CampaignsBoolExp!
       description: Update permission post-condition predicate over the 'campaigns'
@@ -196,26 +238,28 @@ definition:
       type: CampaignsBoolExp!
       description: Update permission pre-condition predicate over the 'campaigns' collection
     - name: updateColumns
-      type: V2UpdateCampaignsByCampaignIdUpdateColumns!
+      type: V2UpdateCampaignsByCampaignIdAndCreatedAtUpdateColumns!
   source:
     dataConnectorName: my_datastore
     dataConnectorCommand:
-      procedure: v2_update_campaigns_by_campaign_id
+      procedure: v2_update_campaigns_by_campaign_id_and_created_at
     argumentMapping:
       keyCampaignId: key_campaign_id
+      keyCreatedAt: key_created_at
       postCheck: post_check
       preCheck: pre_check
       updateColumns: update_columns
   graphql:
-    rootFieldName: v2UpdateCampaignsByCampaignId
+    rootFieldName: v2UpdateCampaignsByCampaignIdAndCreatedAt
     rootFieldKind: Mutation
-  description: Update any row on the 'campaigns' collection using the 'campaign_id' key
+  description: Update any row on the 'campaigns' collection using the
+    'campaign_id' and 'created_at' keys
 
 ---
 kind: CommandPermissions
 version: v1
 definition:
-  commandName: V2UpdateCampaignsByCampaignId
+  commandName: V2UpdateCampaignsByCampaignIdAndCreatedAt
   permissions:
     - role: admin
       allowExecution: true
