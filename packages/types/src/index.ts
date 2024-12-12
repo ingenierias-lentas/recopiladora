@@ -1,3 +1,2 @@
-export { PluginType } from './pluginType';
-export type { Plugin, CollectorPlugin, StorePlugin } from './plugin';
-
+export { pluginType } from './pluginType';
+export { Plugin, CollectorPlugin, StorePlugin } from './types';

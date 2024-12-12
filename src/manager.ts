@@ -1,9 +1,9 @@
-import { Plugin } from '@recopiladora/types';
+import { Plugin } from '@ingenierias-lentas/recopiladora-types';
 import Server from './server';
 
 export class Manager {
   private server: Server = new Server;
-  private plugins: {[key: string]: Plugin} = {};
+  private plugins: { [key: string]: Plugin } = {};
   private pluginOrder: string[] = [];
 
   loadPlugin(plugin: Plugin): void {
