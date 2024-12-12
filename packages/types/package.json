@@ -1,8 +1,13 @@
 {
-  "name": "@recopiladora/types",
-  "version": "0.0.1",
+  "name": "@ingenierias-lentas/recopiladora-types",
+  "version": "0.0.3",
   "description": "typescript types for recopiladora",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "package.json"
+  ],
   "devDependencies": {
     "@types/node": "^20.14.10",
     "ts-node": "^10.9.2",
@@ -10,7 +15,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,7 +33,7 @@
   },
   "homepage": "https://github.com/ingenierias-lentas/recopiladora#readme",
   "dependencies": {
-    "@recopiladora/types": "^0.0.1",
+    "@koa/router": "^12.0.1",
     "@types/koa__router": "^12.0.4",
     "dotenv": "^16.4.5",
     "tsconfig-paths": "^4.2.0"

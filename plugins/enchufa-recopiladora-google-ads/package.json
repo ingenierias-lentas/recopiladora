@@ -1,5 +1,5 @@
 {
-  "name": "@recopiladora/enchufa-recopiladora-google-ads",
+  "name": "@ingenierias-lentas/enchufa-recopiladora-google-ads",
   "version": "0.0.1",
   "description": "data collector for google ads",
   "main": "dist/index.js",
@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/ingenierias-lentas/enchufa-recopiladora-google-ads#readme",
   "dependencies": {
-    "@recopiladora/types": "^0.0.1",
+    "@ingenierias-lentas/recopiladora-types": "^0.0.3",
     "dotenv": "^16.4.5",
     "tsconfig-paths": "^4.2.0"
   }

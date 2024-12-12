@@ -3,7 +3,7 @@ import Koa from 'koa';
 import Router from '@koa/router';
 import Logger from 'koa-logger';
 
-import { Plugin } from '@recopiladora/types';
+import { Plugin } from '@ingenierias-lentas/recopiladora-types';
 import { authRouter } from './routes/auth';
 import { healthRouter } from './routes/health';
 import { graphQLRouter } from './routes/graphql';

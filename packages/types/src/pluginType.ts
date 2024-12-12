@@ -1,4 +1,4 @@
-export enum PluginType {
-  Collect = 'collect',
-  Store = 'store',
+export enum pluginType {
+  Collect = "collect",
+  Store = "store"
 }
